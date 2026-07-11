@@ -18,10 +18,13 @@ This is Abhiroop Mukherjee's living DSA + System Design interview-prep tracker. 
 
 ## Profile Snapshot
 - **Role:** Application Software Engineer 2, Oracle India (previously Software Developer, Jul 2023–Jun 2026). Enterprise stack: NetSuite ERP (SuiteScript, UIF framework, SuiteQL, SuiteAnalytics), Java backends (JAX-RS, Guice), some TypeScript/React.
-- **Education:** B.Tech CS, IIEST Shibpur, CGPA 9.64. Strong coursework in algorithms, graph theory, ML, and cryptography (published paper on cipher-type detection).
+- **Education:** B.Tech CS, IIEST Shibpur, CGPA 9.64. Strong coursework in algorithms, graph theory, ML, and cryptography.
+- **Publication:** "Detection of Cipher Types Using Machine Learning Techniques" (Springer, Aug 2023) — 96.72% accuracy across 5 cipher types using OPT Transformer multi-shot prompting.
+- **Competitive programming:** Amazon ML Challenge 284th rank, Google Kickstart Round D 3176th rank.
 - **LeetCode:** [abhi25902](https://leetcode.com/u/abhi25902/), global rank ~52,900. Historically solved 500+ problems total across languages, with genuine tagged depth in Dynamic Programming (114), Hash Table (192), DFS (113), Backtracking (33), Union-Find (28). Held 365-day and 500-day activity badges, most recent visible activity badge from 2024. Off LeetCode for the last couple of years.
 - **Side projects already show real system-design instincts:** Sentinel (Pub/Sub-based decoupled ingestion, Spring WebFlux + virtual threads, horizontal scaling, TTL cleanup), Mindful Bites (multi-agent LangGraph DAG over Gemini), PCOD Nourish (Genkit tool-calling, Cloud Scheduler microservices). This is not nothing — most candidates prepping for system design rounds have never built anything like this.
 - **Goal:** Applying to Master's programs; if that doesn't work out, job-hunting at FAANG-tier companies. DSA + System Design fluency serves both paths, so this plan is deliberately not tied to one outcome.
+- **Full CV (LaTeX, always current):** [github.com/Abhiroop25902/cv](https://github.com/Abhiroop25902/cv)
 
 ---
 
