@@ -88,16 +88,15 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 - **Pacing philosophy (agreed 2026-07-08):** volume per sitting should increase progressively based on what's sustainable, not jump to match a single strong day. He did 3 problems in one sitting on 2026-07-08 and explicitly said not to treat that as the new baseline — the goal is gradually raising the daily default, not repeating a peak day and burning out. Don't assign multiple problems per weekday session by default; let him opt in if he has energy left, same as the weekend Redundant Connection/Kth Largest split earlier.
 
 ## Currently Assigned
-**Two Pointers is now confirmed and closed** (LC11 - needed a hint on the discard-proof insight, LC15 - self-debugged to AC without a hint). Moving to **Sliding Window** per the Phase 1 roadmap order.
+**Two Pointers confirmed and closed.** Sliding Window confirmed and closed (LC3 + LC424). Moving to **Stack** per the Phase 1 roadmap order.
 
-**Day 12 (next session):**
-- Problem: [Longest Repeating Character Replacement — LeetCode 424 (Medium)](https://leetcode.com/problems/longest-repeating-character-replacement/)
-- Why: second Sliding Window confirm — LC3 went fast (10 min) but was a fairly standard variable-window shape; this one adds a frequency-count + "can I still expand given k replacements allowed" twist, a good second data point before closing the section per the 2-3 confirm rule.
-- Language: Java, timed 20-25 min, no hints/editorial
+**Day 13 (next session):**
+- Problem: [Valid Parentheses — LeetCode 20 (Easy)](https://leetcode.com/problems/valid-parentheses/)
+- Why: classic Stack intro problem, fast confirm or full section depending on speed. Good diagnostic for whether Stack fundamentals are intact or if it needs more reps.
+- Language: Java, timed 10-15 min (Easy), no hints/editorial
 - Report back: time taken, approach, confidence 1-5
 
-**Day 11 result (2026-07-10, 9:13 PM):** LC 3 (Longest Substring Without Repeating Characters) — solved in 10 min, confidence 4/5. Fast, clean pattern transfer from Two Pointers. See Progress Tracker for detail.
-- *(Clear the Day 11 line once Day 12 is reported and this rolls forward)*
+**Day 12 result (2026-07-11, 12:15-1:02 PM):** LC 424 (Longest Repeating Character Replacement) — solved in ~47 min (incl. 3 self-debugged bugs), confidence 3/5. Correct sliding window + frequency-count approach derived independently. Code accepted, O(n*26) time, O(1) space. Two bugs: wrong `right` increment condition, missing initial char save into map; both self-diagnosed. Runtime 19th percentile — rescanning full 26-element array inside the shrink loop is the bottleneck; could track maxFreq as a variable to eliminate that. Sliding Window section now has 2 confirms and is closed.
 
 ---
 
@@ -138,7 +137,7 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 ## DSA Topic Checklist
 - [x] Arrays & Hashing — confirmed 2026-07-08/09 (LC238, LC49)
 - [x] Two Pointers — confirmed 2026-07-09/10 (LC11 - needed a hint, LC15 - self-debugged)
-- [ ] Sliding Window — in progress, 1/2 confirms done (LC3 done, LC424 assigned)
+- [x] Sliding Window — confirmed 2026-07-11 (LC3 done, LC424 done)
 - [ ] Stack
 - [ ] Binary Search
 - [ ] Linked List
@@ -179,6 +178,7 @@ Append a new row after every session — newest at the top.
 
 | Date | Phase | Topic | Problem/Activity | Time | Confidence (1-5) | Notes |
 |------|-------|-------|-------------------|------|-------------------|-------|
+| 2026-07-11 | Phase 1 | Sliding Window | LC 424 - Longest Repeating Character Replacement (Java) | ~47 min (12:15-1:02 PM, 3 self-debugged bugs) | 3/5 | Correct sliding window + frequency-count approach derived independently. Key insight: swapsRequired = windowLength - maxFrequency, abstracted into a helper. Two bugs: wrong `right` increment condition in inner while loop, missing initial char save into map (cascading downstream errors); both self-diagnosed. Also fixed an off-by-one: `new int['Z'-'A']` → `new int['Z'-'A'+1]`. TC O(n*26) = O(n), SC O(1). Runtime 19th percentile — bottleneck is rescanning full 26-element array inside the shrink loop on every left-shrink; could maintain a running `maxFreq` variable instead. Good reasoning trace: derived the max-count-subproblem idea early, correctly identified the sort-based approach as unnecessary once the O(26) scan was realized. Sliding Window section now has 2 confirms (LC3 + LC424) and is closed. |
 | 2026-07-10 | Phase 1 | Sliding Window | LC 3 - Longest Substring Without Repeating Characters (Java) | 10 min (9:13-9:23 PM) | 4/5 | Fast, immediate pattern transfer from Two Pointers ("same two-pointer approach, different rule for moving them" — exactly right mental model). All bugs were minor typos/off-by-ones, no conceptual issues. Two Java vocabulary gaps surfaced and resolved via lookup: boxed wrapper types needed for generics (Character, not char), and contains() as the Java membership-check idiom (he was thinking of C++'s find()!=end() / C++20's contains()). Structural note: `ans` update sits at the top of the loop (measuring the previous iteration's window), which is why a trailing post-loop update was needed and why the off-by-one bug happened — moving the update to right after `right++` inside the loop is the more standard, less fragile idiom; not urgent to refactor this one, but worth adopting going forward. |
 | 2026-07-10 | Phase 1 | Two Pointers | LC 15 - 3Sum (Java) | ~20 min (8:30-8:50 PM, 5 self-debugged bugs, no external hint needed) | 3/5 | Correctly transferred the sort + two-pointer pattern from Two Sum unprompted, and independently solved the duplicate-triplet problem via a HashSet<List<Integer>> dedup — a valid approach, though not the standard one. Every bug (array bounds, missing loop-break, variable typos) was self-diagnosed and fixed without a hint — good debugging trace, if slow (5 rounds). Real gap: only moved `left++` after a match, never `right--`, causing redundant rescanning on duplicate-heavy input, compounded by HashSet's per-insert hashing overhead on boxed Lists — explains the poor 962ms/6.68th-percentile runtime despite correct O(n²) Big-O. Walked through the standard fix: skip duplicate `i`/`left`/`right` explicitly on a sorted array (move both pointers on a match, then skip forward past repeats) instead of dedup-by-Set — same asymptotic complexity, much better constant factor, no hashing needed. Two Pointers now has 2 confirms (LC11 needed a hint, LC15 self-debugged to AC) — section can close, moving to Sliding Window next. **Follow-up (same session):** implemented the suggested optimization himself and empirically verified both wins separately — Set→List (962ms→544ms, removed hashing overhead) and adding explicit duplicate-skip logic (544ms→32ms, removed redundant rescanning) — strong self-driven verification, not just a passing solve. Also repeated the same unreachable-bounds-guard pattern as LC11 (`left>=length \|\| right<0` check that the loop's own condition already prevents) — worth a standing mental note to check the loop invariant before adding a defensive guard. |
 | 2026-07-09 | Phase 1 | Two Pointers | LC 11 - Container With Most Water (Java) | 19 min (7:25-7:44 PM, incl. ~9 min pre-hint) | 3/5 | Excellent reasoning before the hint: found the area formula immediately, correctly ruled out the compare-both-directions DP-style approach as O(n²), and validated against the 10^5 constraint to confirm O(n²) would TLE before asking for help — exactly the right formula→complexity-budget→elimination sequence for an interview. The actual gap was a specific unseen insight, not general two-pointer weakness: "always move the shorter/limiting pointer inward, moving the taller one can never win" is a classic non-obvious greedy-elimination proof most people need to see once. Post-hint, excellent self-validation against mountain and valley shapes before coding — good habit to keep. Code correct and optimal (O(n)/O(1)) but added an unnecessary equal-height tie-break branch (ties can go either direction safely) containing a bounds check that's actually unreachable given the loop's own `left < right` invariant — worth noticing the difference from the earlier Course Schedule assertions, which guarded real invariants rather than an already-impossible case. Follow-up discussion: he pushed back defending the tie-break logic (checking next-heights to minimize height reduction) — walked through the rigorous discard proof (`height[left] <= height[right]` ⟹ area(left,k) < area(left,right) for all k between them, provably not just probably), which shows both directions are simultaneously valid on a tie, so look-ahead adds no value. Good habit that he questioned it rather than just accepting the simplification — worth remembering he responds well to proofs, not just assertions. |
@@ -192,11 +192,11 @@ Append a new row after every session — newest at the top.
 | 2026-07-03 | Phase 0 | DP | LC 300 - Longest Increasing Subsequence (Java, O(n²)) | ~60 min active (65 min elapsed − 5 min break) | 2/5 | Recursion (take/skip) came fast (~11 min), but recursion→bottom-up-table translation didn't click on its own — needed a hint on the `dp[i]` = LIS ending at i framing. Independently derived the "patience sorting / tails" dominance-pruning idea from first principles before being taught it — strong signal the underlying DP intuition is intact. Real gap identified: recursive-DP → tabulation translation fluency, not DP concepts themselves. Also flagged: comfort with `int[]` vs `List<Integer>` needs reps — reached for List by habit. |
 
 ## Stats Summary
-*(update periodically, not every session — last synced 2026-07-10)*
-- Total problems solved since restart: 11 (Days 1-11, LC300/208/215/684/207/210/238/49/11/15/3)
-- Active days so far: 7 of 8 calendar days (2026-07-03 to 07-10; 07-07 was a gap)
-- Current streak: 3 days (07-08, 07-09, 07-10 — the earlier 07-03 to 07-06 run of 4 days ended at the 07-07 gap)
-- Current phase: Phase 1 — Pattern Reactivation. Arrays & Hashing and Two Pointers confirmed/closed; Sliding Window in progress (1/2 confirms)
+*(update periodically, not every session — last synced 2026-07-11)*
+- Total problems solved since restart: 12 (Days 1-12, LC300/208/215/684/207/210/238/49/11/15/3/424)
+- Active days so far: 8 of 9 calendar days (2026-07-03 to 07-11; 07-07 was a gap)
+- Current streak: 4 days (07-08, 07-09, 07-10, 07-11)
+- Current phase: Phase 1 — Pattern Reactivation. Arrays & Hashing, Two Pointers, and Sliding Window all confirmed/closed; Stack is next.
 - Weakest topic: Dynamic Programming — real unresolved gap (recursion→tabulation translation), confidence 2/5, no reinforcement rep yet (scheduled for later in Phase 1 when the roadmap reaches DP)
 - Strongest topics: Union-Find (5/5, no rust at all), Arrays & Hashing (5/5, 4/5 — fast both times), Redundant Connection-style graph work generally solid
 - Recurring pattern to watch: Java collection API mixups (poll/peek, contains/isPresent) and "adjacency list" vs "adjacency matrix" terminology — see C++ → Java Quick Reference section above
