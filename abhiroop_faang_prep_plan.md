@@ -88,15 +88,17 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 - **Pacing philosophy (agreed 2026-07-08):** volume per sitting should increase progressively based on what's sustainable, not jump to match a single strong day. He did 3 problems in one sitting on 2026-07-08 and explicitly said not to treat that as the new baseline — the goal is gradually raising the daily default, not repeating a peak day and burning out. Don't assign multiple problems per weekday session by default; let him opt in if he has energy left, same as the weekend Redundant Connection/Kth Largest split earlier.
 
 ## Currently Assigned
-**Two Pointers confirmed and closed.** Sliding Window confirmed and closed (LC3 + LC424). Moving to **Stack** per the Phase 1 roadmap order.
+**Two Pointers confirmed and closed.** Sliding Window confirmed and closed (LC3 + LC424). Stack confirmed and closed (LC20). Moving to **Binary Search** per the Phase 1 roadmap order.
 
 **Day 13 (next session):**
-- Problem: [Valid Parentheses — LeetCode 20 (Easy)](https://leetcode.com/problems/valid-parentheses/)
-- Why: classic Stack intro problem, fast confirm or full section depending on speed. Good diagnostic for whether Stack fundamentals are intact or if it needs more reps.
+- Problem: [Binary Search — LeetCode 704 (Easy)](https://leetcode.com/problems/binary-search/)
+- Why: baseline confirm for Binary Search — template correctness, edge cases (left=0, right=n-1, single element). Fast pass means move to a medium next; slower means work through a few more.
 - Language: Java, timed 10-15 min (Easy), no hints/editorial
 - Report back: time taken, approach, confidence 1-5
 
-**Day 12 result (2026-07-11, 12:15-1:02 PM):** LC 424 (Longest Repeating Character Replacement) — solved in ~47 min (incl. 3 self-debugged bugs), confidence 3/5. Correct sliding window + frequency-count approach derived independently. Code accepted, O(n*26) time, O(1) space. Two bugs: wrong `right` increment condition, missing initial char save into map; both self-diagnosed. Runtime 19th percentile — rescanning full 26-element array inside the shrink loop is the bottleneck; could track maxFreq as a variable to eliminate that. Sliding Window section now has 2 confirms and is closed.
+**Day 13 result (2026-07-11, 2:08-2:17 PM):** LC 20 (Valid Parentheses) — solved in ~9 min, confidence 4/5. Clean stack implementation using ArrayList (researched Stack vs ArrayList first, correctly identified thread-safety overhead as the reason to avoid java.util.Stack). One bug: forgot the empty-stack case before accessing top — fixed on resubmit. Runtime 87th percentile. Code correct, O(n)/O(n). Stack section confirmed and closed.
+
+**Day 12 result (2026-07-11, 12:15-1:02 PM):** LC 424 (Longest Repeating Character Replacement) — solved in ~47 min (incl. 3 self-debugged bugs), confidence 3/5. Correct sliding window + frequency-count approach derived independently. Code accepted, O(n*26) time, O(1) space. Runtime 19th percentile — rescanning full 26-element array inside the shrink loop is the bottleneck; could track maxFreq as a variable to eliminate that. Sliding Window section now has 2 confirms and is closed.
 
 ---
 
@@ -138,7 +140,7 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 - [x] Arrays & Hashing — confirmed 2026-07-08/09 (LC238, LC49)
 - [x] Two Pointers — confirmed 2026-07-09/10 (LC11 - needed a hint, LC15 - self-debugged)
 - [x] Sliding Window — confirmed 2026-07-11 (LC3 done, LC424 done)
-- [ ] Stack
+- [x] Stack — confirmed 2026-07-11 (LC20 done)
 - [ ] Binary Search
 - [ ] Linked List
 - [ ] Trees (traversals, BST)
@@ -178,6 +180,7 @@ Append a new row after every session — newest at the top.
 
 | Date | Phase | Topic | Problem/Activity | Time | Confidence (1-5) | Notes |
 |------|-------|-------|-------------------|------|-------------------|-------|
+| 2026-07-11 | Phase 1 | Stack | LC 20 - Valid Parentheses (Java) | ~9 min (2:08-2:17 PM, 1 self-debugged bug) | 4/5 | Clean stack implementation using ArrayList. Researched Stack vs ArrayList before coding — correctly identified thread-safety overhead in java.util.Stack as reason to avoid it, a good interview talking point. One bug: forgot empty-stack check before accessing top, caught on resubmit. Runtime 87th percentile. O(n)/O(n). Stack confirmed and closed. |
 | 2026-07-11 | Phase 1 | Sliding Window | LC 424 - Longest Repeating Character Replacement (Java) | ~47 min (12:15-1:02 PM, 3 self-debugged bugs) | 3/5 | Correct sliding window + frequency-count approach derived independently. Key insight: swapsRequired = windowLength - maxFrequency, abstracted into a helper. Two bugs: wrong `right` increment condition in inner while loop, missing initial char save into map (cascading downstream errors); both self-diagnosed. Also fixed an off-by-one: `new int['Z'-'A']` → `new int['Z'-'A'+1]`. TC O(n*26) = O(n), SC O(1). Runtime 19th percentile — bottleneck is rescanning full 26-element array inside the shrink loop on every left-shrink; could maintain a running `maxFreq` variable instead. Good reasoning trace: derived the max-count-subproblem idea early, correctly identified the sort-based approach as unnecessary once the O(26) scan was realized. Sliding Window section now has 2 confirms (LC3 + LC424) and is closed. |
 | 2026-07-10 | Phase 1 | Sliding Window | LC 3 - Longest Substring Without Repeating Characters (Java) | 10 min (9:13-9:23 PM) | 4/5 | Fast, immediate pattern transfer from Two Pointers ("same two-pointer approach, different rule for moving them" — exactly right mental model). All bugs were minor typos/off-by-ones, no conceptual issues. Two Java vocabulary gaps surfaced and resolved via lookup: boxed wrapper types needed for generics (Character, not char), and contains() as the Java membership-check idiom (he was thinking of C++'s find()!=end() / C++20's contains()). Structural note: `ans` update sits at the top of the loop (measuring the previous iteration's window), which is why a trailing post-loop update was needed and why the off-by-one bug happened — moving the update to right after `right++` inside the loop is the more standard, less fragile idiom; not urgent to refactor this one, but worth adopting going forward. |
 | 2026-07-10 | Phase 1 | Two Pointers | LC 15 - 3Sum (Java) | ~20 min (8:30-8:50 PM, 5 self-debugged bugs, no external hint needed) | 3/5 | Correctly transferred the sort + two-pointer pattern from Two Sum unprompted, and independently solved the duplicate-triplet problem via a HashSet<List<Integer>> dedup — a valid approach, though not the standard one. Every bug (array bounds, missing loop-break, variable typos) was self-diagnosed and fixed without a hint — good debugging trace, if slow (5 rounds). Real gap: only moved `left++` after a match, never `right--`, causing redundant rescanning on duplicate-heavy input, compounded by HashSet's per-insert hashing overhead on boxed Lists — explains the poor 962ms/6.68th-percentile runtime despite correct O(n²) Big-O. Walked through the standard fix: skip duplicate `i`/`left`/`right` explicitly on a sorted array (move both pointers on a match, then skip forward past repeats) instead of dedup-by-Set — same asymptotic complexity, much better constant factor, no hashing needed. Two Pointers now has 2 confirms (LC11 needed a hint, LC15 self-debugged to AC) — section can close, moving to Sliding Window next. **Follow-up (same session):** implemented the suggested optimization himself and empirically verified both wins separately — Set→List (962ms→544ms, removed hashing overhead) and adding explicit duplicate-skip logic (544ms→32ms, removed redundant rescanning) — strong self-driven verification, not just a passing solve. Also repeated the same unreachable-bounds-guard pattern as LC11 (`left>=length \|\| right<0` check that the loop's own condition already prevents) — worth a standing mental note to check the loop invariant before adding a defensive guard. |
@@ -193,10 +196,10 @@ Append a new row after every session — newest at the top.
 
 ## Stats Summary
 *(update periodically, not every session — last synced 2026-07-11)*
-- Total problems solved since restart: 12 (Days 1-12, LC300/208/215/684/207/210/238/49/11/15/3/424)
+- Total problems solved since restart: 13 (Days 1-13, LC300/208/215/684/207/210/238/49/11/15/3/424/20)
 - Active days so far: 8 of 9 calendar days (2026-07-03 to 07-11; 07-07 was a gap)
 - Current streak: 4 days (07-08, 07-09, 07-10, 07-11)
-- Current phase: Phase 1 — Pattern Reactivation. Arrays & Hashing, Two Pointers, and Sliding Window all confirmed/closed; Stack is next.
+- Current phase: Phase 1 — Pattern Reactivation. Arrays & Hashing, Two Pointers, Sliding Window, and Stack all confirmed/closed; Binary Search is next.
 - Weakest topic: Dynamic Programming — real unresolved gap (recursion→tabulation translation), confidence 2/5, no reinforcement rep yet (scheduled for later in Phase 1 when the roadmap reaches DP)
 - Strongest topics: Union-Find (5/5, no rust at all), Arrays & Hashing (5/5, 4/5 — fast both times), Redundant Connection-style graph work generally solid
 - Recurring pattern to watch: Java collection API mixups (poll/peek, contains/isPresent) and "adjacency list" vs "adjacency matrix" terminology — see C++ → Java Quick Reference section above
