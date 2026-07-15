@@ -27,6 +27,7 @@ Volume per day should increase gradually based on what's sustainable — don't j
 - **Weekdays:** quick-stats only (time taken, approach landed on, any issues/hints needed). No full walkthrough. Keeps sessions inside the 1-hr budget.
 - **Once a week (weekend):** full interview-style walkthrough — talk through approach out loud, get pushed on trade-offs.
 - He writes running timestamped logs *as it happens* (e.g. "6:31: trying X", "6:46: found bug Y") — read these as a real-time trace, not a polished report.
+- **Confidence rating:** gauge it yourself from the solve — don't ask him. Factors: time vs target, bug count, whether approach was immediate or needed hints, code quality, difficulty level. State it when logging the session.
 
 ## Git workflow
 
@@ -38,3 +39,47 @@ After every plan update (progress logged, checklist ticked, stats synced), **com
 - If multiple problems are solved on the same date, merge them into one row with the date. List each problem in the Problem/Activity column and put timestamps + details in Notes.
 - Keep the Stats Summary in sync when progress is logged.
 - Don't reformat or restructure existing sections without being asked.
+
+
+<!-- headroom:rtk-instructions -->
+# RTK (Rust Token Killer) - Token-Optimized Commands
+
+When running shell commands, **always prefix with `rtk`**. This reduces context
+usage by 60-90% with zero behavior change. If rtk has no filter for a command,
+it passes through unchanged — so it is always safe to use.
+
+## Key Commands
+```bash
+# Git (59-80% savings)
+rtk git status          rtk git diff            rtk git log
+
+# Files & Search (60-75% savings)
+rtk ls <path>           rtk read <file>         rtk grep <pattern>
+rtk find <pattern>      rtk diff <file>
+
+# Test (90-99% savings) — shows failures only
+rtk pytest tests/       rtk cargo test          rtk test <cmd>
+
+# Build & Lint (80-90% savings) — shows errors only
+rtk tsc                 rtk lint                rtk cargo build
+rtk prettier --check    rtk mypy                rtk ruff check
+
+# Analysis (70-90% savings)
+rtk err <cmd>           rtk log <file>          rtk json <file>
+rtk summary <cmd>       rtk deps                rtk env
+
+# GitHub (26-87% savings)
+rtk gh pr view <n>      rtk gh run list         rtk gh issue list
+
+# Infrastructure (85% savings)
+rtk docker ps           rtk kubectl get         rtk docker logs <c>
+
+# Package managers (70-90% savings)
+rtk pip list            rtk pnpm install        rtk npm run <script>
+```
+
+## Rules
+- In command chains, prefix each segment: `rtk git add . && rtk git commit -m "msg"`
+- For debugging, use raw command without rtk prefix
+- `rtk proxy <cmd>` runs command without filtering but tracks usage
+<!-- /headroom:rtk-instructions -->
