@@ -41,17 +41,6 @@ You asked whether to relearn C++ (stalled at classes/inheritance, no STL/smart-p
 - Every FAANG-tier company accepts Java for coding rounds.
 - If a specific role explicitly wants C++ (some low-latency/systems teams), cross that bridge if it actually comes up — don't hedge against it now.
 
-## C++ → Java Quick Reference (running list, add as new gaps surface)
-Collected from actual mid-problem friction points — the goal is to stop re-discovering the same thing twice.
-
-- **Queue operations:** C++ `push()`/`pop()`/`top()` → Java `offer()`/`poll()`/`peek()`. Memory aid: "poll" *pulls* something out (removes), "peek" just looks (doesn't remove).
-- **Set/Map membership check:** C++ `s.find(x) != s.end()` (or C++20's `s.contains(x)`) → Java `s.contains(x)` directly. (Not to be confused with `Optional.isPresent()`, which is unrelated — different "does this hold something" question.)
-- **No default parameters in Java.** C++/Lombok-style defaults don't exist natively — the idiomatic fix is method overloading where the shorter signature delegates to the fuller one, e.g. `insert(word) { insert(word, 0); }`, not reimplementing the logic twice.
-- **Primitives can't go directly into generics.** `Set<char>` isn't legal — use the boxed wrapper: `int`→`Integer`, `char`→`Character`, `boolean`→`Boolean`, etc. General rule, not just one type.
-- **Arrays use reference equality for `equals()`/`hashCode()`**, so `int[]` can't be used as a meaningful `HashMap`/`HashSet` key (two arrays with identical contents are still "different" keys) — use `List<Integer>` instead, which has value-based equality.
-- **`Queue` is an interface, not a class** — instantiate with `new ArrayDeque<>()` (or `LinkedList<>()`), not `new Queue<>()`.
-- **List vs. array length:** `.size()` for `List`/collections, `.length` for arrays (property, not method), `.length()` for `String` (method). Three different syntaxes for "how big is this."
-
 ---
 
 ## Roadmap (~16 weeks to interview-ready, then indefinite maintenance)
@@ -206,7 +195,7 @@ Append a new row after every session — newest at the top.
 - Current phase: Phase 1 — Pattern Reactivation. 6 sections confirmed/closed (Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List); Trees in progress (1 Easy done, need medium confirm).
 - Weakest topic: Dynamic Programming — real unresolved gap (recursion→tabulation translation), confidence 2/5, no reinforcement rep yet (scheduled for later in Phase 1 when the roadmap reaches DP)
 - Strongest topics: Union-Find (5/5, no rust at all), Arrays & Hashing (5/5, 4/5 — fast both times), Linked List (5/5 — LC206 in 3 min, LC2 in 10 min, both 100th percentile)
-- Recurring pattern to watch: Java collection API mixups (poll/peek, contains/isPresent) and "adjacency list" vs "adjacency matrix" terminology — see C++ → Java Quick Reference section above
+- Recurring pattern to watch: Java collection API mixups (poll/peek, contains/isPresent) and "adjacency list" vs "adjacency matrix" terminology
 
 ---
 
