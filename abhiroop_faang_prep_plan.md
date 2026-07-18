@@ -1,5 +1,5 @@
 # Abhiroop's FAANG Interview Prep — Living Plan
-*Last updated: 2026-07-12 (Phase 1, 6 topics confirmed — Linked List closed, Trees next)*
+*Last updated: 2026-07-18 (Phase 1, 8 topics confirmed — Trees closed, Backtracking next)*
 
 ---
 
@@ -82,13 +82,15 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 - **No choices:** never offer a menu of problems — just assign the next one. He'll self-select if he wants more or wants to skip ahead; the AI shouldn't let him bias toward comfortable territory.
 
 ## Currently Assigned
-**Phase 1 progress:** Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List all confirmed/closed. Trees in progress (LC 104 + LC 102 + LC 98 done).
+**Phase 1 progress:** Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees all confirmed/closed.
 
 **Next session:**
-- Problem: [Invert Binary Tree — LC 226 (Easy)](https://leetcode.com/problems/invert-binary-tree/)
-- Why: simple recursive swap, quick confirm after the heavier LC 98, keeps trees moving.
-- Language: Java, timed 5-10 min, no hints
+- Problem: [LC 46 — Permutations (Medium)](https://leetcode.com/problems/permutations/)
+- Why: classic backtracking entry point — generate all orderings via swap or used-array, clean pattern reactivation.
+- Language: Java, timed 15-20 min, no hints
 - Report back: time taken, approach, any issues
+
+**2026-07-18 result:** LC 226 — Invert Binary Tree (2 min, DFS recursive swap, 0 bugs, 100th percentile). Trivial confirm, trees section closed (4 problems: LC104, LC102, LC98, LC226).
 
 **2026-07-15 result:** LC 104 — Maximum Depth of Binary Tree (9 min, DFS recursive, 0 bugs, 100th percentile). LC 102 — Binary Tree Level Order Traversal (10 min, BFS with queue, 0 bugs, 96th percentile). LC 98 — Validate BST (23 min, recursive bounds with long, 2 self-debugged bugs, 100th percentile). Trees DFS + BFS + BST validation done. LC 98 had two classic traps: missed subtree-wide bounds propagation (fixed by passing min/max down), then Integer overflow on boundary sentinels (fixed by switching to Long).
 
@@ -174,6 +176,7 @@ Append a new row after every session — newest at the top.
 
 | Date | Phase | Topic | Problem/Activity | Time | Confidence (1-5) | Notes |
 |------|-------|-------|-------------------|------|-------------------|-------|
+| 2026-07-18 | Phase 1 | Trees | LC 226 — Invert Binary Tree (Easy) | 2 min (10:32-10:34, 0 bugs) | 5/5 | DFS recursive swap — trivial confirm. Correctly identified left/right swap pattern immediately. TC O(n), SC O(n) worst case. Runtime 100th percentile. Trees section now closed with 4 problems (LC104, LC102, LC98, LC226). Next: Backtracking (LC 46). |
 | 2026-07-15 | Phase 1 | Trees | LC 104 — Maximum Depth of Binary Tree (Easy, 9 min, 0 bugs, 100th percentile); LC 102 — Binary Tree Level Order Traversal (Medium, 10 min, 0 bugs, 96th percentile); LC 98 — Validate BST (Medium, 23 min, 2 self-debugged bugs, 100th percentile) | ~42 min total | 4/5, 4/5, 3/5 | Three problems, one sitting. **LC 104:** DFS recursive, clean. **LC 102:** BFS with ArrayDeque, level-by-level via levelSize snapshot. **LC 98:** Recursive bounds validation. Two real BST traps hit: (1) only checked immediate parent nodes instead of propagating bounds through entire subtree — rewrote to pass min/max down correctly; (2) used Integer.MIN/MAX_VALUE as boundary sentinels which fails when tree contains actual min/max ints — fixed by switching to Long. Both self-diagnosed without hints. Trees section well covered: DFS, BFS, and BST validation all confirmed. |
 | 2026-07-12 | Phase 1 | Linked List | LC 2 — Add Two Numbers (Medium) | 10 min (8:51-9:01 PM, 1 self-debugged bug, confidence 5/5) | 5/5 | Recursive solution with carry propagation — handled unequal-length lists and final carry correctly. One bug: missed the case where both lists are null but carry > 0, self-diagnosed and fixed. Runtime 100th percentile (1 ms). Code note: two overloaded methods with duplicated logic; idiomatic fix is single public method delegating to a private helper with carry param (same pattern as LC 208 insert). Linked List medium confirm done — **section closed.** |
 | 2026-07-11 | Phase 1 | Sliding Window / Stack / Binary Search / Linked List | LC 424 — Longest Repeating Character Replacement (47 min, 12:15-1:02 PM, 3 self-debugged bugs, confidence 3/5); LC 20 — Valid Parentheses (9 min, 2:08-2:17 PM, 1 self-debugged bug, confidence 4/5); LC 704 — Binary Search (8 min, 2:25-2:33 PM, 1 self-debugged bug, confidence 5/5); LC 206 — Reverse Linked List (3 min, 3:25-3:28 PM, 0 bugs, confidence 5/5) | ~67 min total | 3/5, 4/5, 5/5, 5/5 | Four problems, one sitting. **LC 424:** Correct sliding window + frequency-count approach derived independently. Key insight: swapsRequired = windowLength - maxFrequency. Bugs: wrong right increment condition, missing initial char save into map, off-by-one in array size — all self-diagnosed. TC O(n*26), SC O(1). Runtime 19th percentile. **LC 20:** Clean stack implementation using ArrayList. Researched Stack vs ArrayList first — correctly identified thread-safety overhead as reason to avoid java.util.Stack. One bug: forgot empty-stack check before accessing top. Runtime 87th percentile. **LC 704:** Correctly recalled overflow fix (left + (right-left)/2), noted compiler optimizes /2 to bit-shift. Made insightful observation that binary search is "two pointers that converge." One typo bug (mid vs nums[mid]). Runtime 100th percentile. All three prior sections confirmed and closed. **LC 206:** Three-pointer iterative reversal (back/curr/front) recalled from memory with zero friction. 3 min, 0 bugs, 100th percentile. Linked List fundamentals confirmed intact — next: medium confirm (LC 2). |
@@ -188,13 +191,13 @@ Append a new row after every session — newest at the top.
 | 2026-07-03 | Phase 0 | DP | LC 300 - Longest Increasing Subsequence (Java, O(n²)) | ~60 min active (65 min elapsed − 5 min break) | 2/5 | Recursion (take/skip) came fast (~11 min), but recursion→bottom-up-table translation didn't click on its own — needed a hint on the `dp[i]` = LIS ending at i framing. Independently derived the "patience sorting / tails" dominance-pruning idea from first principles before being taught it — strong signal the underlying DP intuition is intact. Real gap identified: recursive-DP → tabulation translation fluency, not DP concepts themselves. Also flagged: comfort with `int[]` vs `List<Integer>` needs reps — reached for List by habit. |
 
 ## Stats Summary
-*(update periodically, not every session — last synced 2026-07-15)*
-- Total problems solved since restart: 19 (LC300/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98)
-- Active days so far: 10 of 12 calendar days (2026-07-03 to 07-15; 07-07, 07-13, 07-14 were gaps)
-- Current streak: 1 day (07-15; previous streak was 5 days ending 07-12)
-- Current phase: Phase 1 — Pattern Reactivation. 7 sections confirmed/closed (Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees); Heap/PQ + Tries + Union-Find + Topological Sort from Phase 0 also solid.
+*(update periodically, not every session — last synced 2026-07-18)*
+- Total problems solved since restart: 20 (LC300/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226)
+- Active days so far: 11 of 15 calendar days (2026-07-03 to 07-18; 07-07, 07-13, 07-14, 07-16, 07-17 were gaps)
+- Current streak: 1 day (07-18; previous streak was 5 days ending 07-12)
+- Current phase: Phase 1 — Pattern Reactivation. 8 sections confirmed/closed (Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking starting next); Heap/PQ + Tries + Union-Find + Topological Sort from Phase 0 also solid.
 - Weakest topic: Dynamic Programming — real unresolved gap (recursion→tabulation translation), confidence 2/5, no reinforcement rep yet (scheduled for later in Phase 1 when the roadmap reaches DP)
-- Strongest topics: Union-Find (5/5, no rust at all), Arrays & Hashing (5/5, 4/5 — fast both times), Linked List (5/5 — LC206 in 3 min, LC2 in 10 min, both 100th percentile)
+- Strongest topics: Union-Find (5/5, no rust at all), Arrays & Hashing (5/5, 4/5 — fast both times), Linked List (5/5 — LC206 in 3 min, LC2 in 10 min, both 100th percentile), Trees (5/5 — 4 problems, LC226 in 2 min)
 - Recurring pattern to watch: Java collection API mixups (poll/peek, contains/isPresent) and "adjacency list" vs "adjacency matrix" terminology
 
 ---
