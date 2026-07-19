@@ -1,5 +1,5 @@
 # Abhiroop's FAANG Interview Prep — Living Plan
-*Last updated: 2026-07-18 (Phase 1, 8 topics confirmed — Trees closed, Backtracking next)*
+*Last updated: 2026-07-19 (Phase 1, 9 topics confirmed — Graphs BFS/DFS completed, Dijkstra's next)*
 
 ---
 
@@ -82,13 +82,15 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 - **No choices:** never offer a menu of problems — just assign the next one. He'll self-select if he wants more or wants to skip ahead; the AI shouldn't let him bias toward comfortable territory.
 
 ## Currently Assigned
-**Phase 1 progress:** Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees all confirmed/closed.
+**Phase 1 progress:** Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS all confirmed/closed.
 
-**Next session:**
-- Problem: [LC 200 — Number of Islands (Medium)](https://leetcode.com/problems/number-of-islands/)
-- Why: classic grid BFS/DFS — tree traversal skills transfer directly, bridges into Graphs section.
-- Language: Java, timed 15-20 min, no hints
+**Next session:
+- Problem: [LC 743 — Network Delay Time (Medium)](https://leetcode.com/problems/network-delay-time/)
+- Why: Classic Dijkstra's algorithm application — builds on graph traversal skills, introduces weighted graphs and shortest path.
+- Language: Java, timed 20-25 min, no hints
 - Report back: time taken, approach, any issues
+
+**2026-07-19 result:** LC 200 — Number of Islands (Medium, graph DFS with in-place modification) | 15 min | 4/5 | Started with visited[][] approach (minor bugs fixed), switched to in-place grid modification for O(1) extra space. Accepted: 3 ms (beats 87.98%), 52.42 MB (beats 33.82%). Demonstrated DFS traversal, grid mutation technique, and complexity analysis. Graphs BFS/DFS section confirmed.
 
 **2026-07-18 result:** LC 226 (2 min, 0 bugs); LC 46 (20 min, 0 bugs, Set → boolean[] optimization done post-submit); LC 78 (15 min, 0 bugs, take-or-not-take pattern, 1ms). Backtracking confirmed — two templates covered (used-array for permutations, take-or-skip for subsets). Next: Graphs BFS/DFS.
 
@@ -145,7 +147,7 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 - [ ] Backtracking
 - [x] Graphs — Union-Find — tested Phase 0 (LC684), fully intact, no rust
 - [x] Graphs — Topological Sort — tested + reinforced Phase 0 (LC207 → LC210), genuine new-concept gap closed
-- [ ] Graphs — BFS/DFS (general)
+- [x] Graphs — BFS/DFS (general)
 - [ ] Graphs — Dijkstra/Shortest Path
 - [ ] 1-D Dynamic Programming — tested Phase 0 (LC300), real unresolved gap (recursion→tabulation translation), needs a reinforcement rep when Phase 1 reaches DP
 - [ ] 2-D Dynamic Programming
@@ -176,6 +178,7 @@ Append a new row after every session — newest at the top.
 
 | Date | Phase | Topic | Problem/Activity | Time | Confidence (1-5) | Notes |
 |------|-------|-------|-------------------|------|-------------------|-------|
+| 2026-07-19 | Phase 1 | Graphs BFS/DFS | LC 200 — Number of Islands (Medium, graph DFS with in-place modification) | 15 min | 4/5 | Started with visited[][] approach (minor bugs fixed), switched to in-place grid modification for O(1) extra space. Accepted: 3 ms (beats 87.98%), 52.42 MB (beats 33.82%). Demonstrated DFS traversal, grid mutation technique, and complexity analysis. Graphs BFS/DFS section confirmed. |
 | 2026-07-18 | Phase 1 | Trees / Backtracking | LC 226 — Invert Binary Tree (Easy, 2 min, 0 bugs); LC 46 — Permutations (Medium, 20 min, 0 bugs, optimized to boolean[] post-submit); LC 78 — Subsets (Medium, 15 min, 0 bugs, take-or-not-take, 1ms) | ~37 min total | 5/5, 3/5→4/5, 4/5 | Three problems. **LC 226:** trivial confirm, trees closed. **LC 46:** HashSet+Set.copyOf first, then optimized to boolean[] used — standard template locked in. **LC 78:** take-or-not-take pattern, clean and fast. Two distinct backtracking templates confirmed: used-array (permutations) and take-or-skip (subsets). Next: Graphs BFS/DFS (LC 200). |
 | 2026-07-15 | Phase 1 | Trees | LC 104 — Maximum Depth of Binary Tree (Easy, 9 min, 0 bugs, 100th percentile); LC 102 — Binary Tree Level Order Traversal (Medium, 10 min, 0 bugs, 96th percentile); LC 98 — Validate BST (Medium, 23 min, 2 self-debugged bugs, 100th percentile) | ~42 min total | 4/5, 4/5, 3/5 | Three problems, one sitting. **LC 104:** DFS recursive, clean. **LC 102:** BFS with ArrayDeque, level-by-level via levelSize snapshot. **LC 98:** Recursive bounds validation. Two real BST traps hit: (1) only checked immediate parent nodes instead of propagating bounds through entire subtree — rewrote to pass min/max down correctly; (2) used Integer.MIN/MAX_VALUE as boundary sentinels which fails when tree contains actual min/max ints — fixed by switching to Long. Both self-diagnosed without hints. Trees section well covered: DFS, BFS, and BST validation all confirmed. |
 | 2026-07-12 | Phase 1 | Linked List | LC 2 — Add Two Numbers (Medium) | 10 min (8:51-9:01 PM, 1 self-debugged bug, confidence 5/5) | 5/5 | Recursive solution with carry propagation — handled unequal-length lists and final carry correctly. One bug: missed the case where both lists are null but carry > 0, self-diagnosed and fixed. Runtime 100th percentile (1 ms). Code note: two overloaded methods with duplicated logic; idiomatic fix is single public method delegating to a private helper with carry param (same pattern as LC 208 insert). Linked List medium confirm done — **section closed.** |
@@ -191,13 +194,13 @@ Append a new row after every session — newest at the top.
 | 2026-07-03 | Phase 0 | DP | LC 300 - Longest Increasing Subsequence (Java, O(n²)) | ~60 min active (65 min elapsed − 5 min break) | 2/5 | Recursion (take/skip) came fast (~11 min), but recursion→bottom-up-table translation didn't click on its own — needed a hint on the `dp[i]` = LIS ending at i framing. Independently derived the "patience sorting / tails" dominance-pruning idea from first principles before being taught it — strong signal the underlying DP intuition is intact. Real gap identified: recursive-DP → tabulation translation fluency, not DP concepts themselves. Also flagged: comfort with `int[]` vs `List<Integer>` needs reps — reached for List by habit. |
 
 ## Stats Summary
-*(update periodically, not every session — last synced 2026-07-18)*
-- Total problems solved since restart: 22 (LC300/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78)
-- Active days so far: 11 of 15 calendar days (2026-07-03 to 07-18; 07-07, 07-13, 07-14, 07-16, 07-17 were gaps)
-- Current streak: 1 day (07-18; previous streak was 5 days ending 07-12)
-- Current phase: Phase 1 — Pattern Reactivation. 8 sections confirmed/closed (Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking); Graphs BFS/DFS starting next; Heap/PQ + Tries + Union-Find + Topological Sort from Phase 0 also solid.
+*(update periodically, not every session — last synced 2026-07-19)*
+- Total problems solved since restart: 24 (LC300/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/LC 200)
+- Active days so far: 13 of 17 calendar days (2026-07-03 to 07-19; 07-07, 07-13, 07-14, 07-16, 07-17 were gaps)
+- Current streak: 2 days (07-18 to 07-19; previous streak was 5 days ending 07-12)
+- Current phase: Phase 1 — Pattern Reactivation. 9 sections confirmed/closed (Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS); Heap/PQ + Tries + Union-Find + Topological Sort from Phase 0 also solid.
 - Weakest topic: Dynamic Programming — real unresolved gap (recursion→tabulation translation), confidence 2/5, no reinforcement rep yet (scheduled for later in Phase 1 when the roadmap reaches DP)
-- Strongest topics: Union-Find (5/5, no rust at all), Arrays & Hashing (5/5, 4/5 — fast both times), Linked List (5/5 — LC206 in 3 min, LC2 in 10 min, both 100th percentile), Trees (5/5 — 4 problems, LC226 in 2 min)
+- Strongest topics: Union-Find (5/5, no rust at all), Arrays & Hashing (5/5, 4/5 — fast both times), Linked List (5/5 — LC206 in 3 min, LC2 in 10 min, both 100th percentile), Trees (5/5 — 4 problems, LC226 in 2 min), Graphs BFS/DFS (4/5 — LC200 solved with efficient in-place DFS)
 - Recurring pattern to watch: Java collection API mixups (poll/peek, contains/isPresent) and "adjacency list" vs "adjacency matrix" terminology
 
 ---
