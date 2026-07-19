@@ -90,8 +90,6 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 - Language: Java, timed 20-25 min, no hints
 - Report back: time taken, approach, any issues
 
-**2026-07-19 result:** LC 200 — Number of Islands (Medium, graph DFS with in-place modification) | 15 min | 4/5 | Started with visited[][] approach (minor bugs fixed), switched to in-place grid modification for O(1) extra space. Accepted: 3 ms (beats 87.98%), 52.42 MB (beats 33.82%). Demonstrated DFS traversal, grid mutation technique, and complexity analysis. Graphs BFS/DFS section confirmed.
-
 **2026-07-18 result:** LC 226 (2 min, 0 bugs); LC 46 (20 min, 0 bugs, Set → boolean[] optimization done post-submit); LC 78 (15 min, 0 bugs, take-or-not-take pattern, 1ms). Backtracking confirmed — two templates covered (used-array for permutations, take-or-skip for subsets). Next: Graphs BFS/DFS.
 
 **2026-07-15 result:** LC 104 — Maximum Depth of Binary Tree (9 min, DFS recursive, 0 bugs, 100th percentile). LC 102 — Binary Tree Level Order Traversal (10 min, BFS with queue, 0 bugs, 96th percentile). LC 98 — Validate BST (23 min, recursive bounds with long, 2 self-debugged bugs, 100th percentile). Trees DFS + BFS + BST validation done. LC 98 had two classic traps: missed subtree-wide bounds propagation (fixed by passing min/max down), then Integer overflow on boundary sentinels (fixed by switching to Long).
@@ -194,9 +192,9 @@ Append a new row after every session — newest at the top.
 | 2026-07-03 | Phase 0 | DP | LC 300 - Longest Increasing Subsequence (Java, O(n²)) | ~60 min active (65 min elapsed − 5 min break) | 2/5 | Recursion (take/skip) came fast (~11 min), but recursion→bottom-up-table translation didn't click on its own — needed a hint on the `dp[i]` = LIS ending at i framing. Independently derived the "patience sorting / tails" dominance-pruning idea from first principles before being taught it — strong signal the underlying DP intuition is intact. Real gap identified: recursive-DP → tabulation translation fluency, not DP concepts themselves. Also flagged: comfort with `int[]` vs `List<Integer>` needs reps — reached for List by habit. |
 
 ## Stats Summary
-*(update periodically, not every session — last synced 2026-07-19)*
-- Total problems solved since restart: 24 (LC300/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/LC 200)
-- Active days so far: 13 of 17 calendar days (2026-07-03 to 07-19; 07-07, 07-13, 07-14, 07-16, 07-17 were gaps)
+*(update periodically, not every session — last synced 2026-07-18)*
+- Total problems solved since restart: 23 (LC300/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200)
+- Active days so far: 12 of 16 calendar days (2026-07-03 to 07-19; 07-07, 07-13, 07-14, 07-16, 07-17, 07-?? were gaps)
 - Current streak: 2 days (07-18 to 07-19; previous streak was 5 days ending 07-12)
 - Current phase: Phase 1 — Pattern Reactivation. 9 sections confirmed/closed (Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS); Heap/PQ + Tries + Union-Find + Topological Sort from Phase 0 also solid.
 - Weakest topic: Dynamic Programming — real unresolved gap (recursion→tabulation translation), confidence 2/5, no reinforcement rep yet (scheduled for later in Phase 1 when the roadmap reaches DP)

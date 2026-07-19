@@ -1,85 +1,73 @@
-# AGENTS.md
+# CLAUDE.md
 
-This repo is a personal DSA + system design interview prep tracker. It contains a single file:
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-- `abhiroop_faang_prep_plan.md` — the living plan (roadmap, progress log, checklists, behavioral stories)
+## Repository Overview
+This is a personal DSA (Data Structures and Algorithms) + System Design interview preparation tracker. The repository contains a single living document:
+- `abhiroop_faang_prep_plan.md` - The living plan containing roadmap, progress tracking, checklists, and behavioral stories
 
-No build system, tests, lint, or CI. This is a markdown-only repo — the only meaningful action is updating the plan file.
+There is no build system, tests, linting, or CI - this is a markdown-only repository where the primary activity is updating the plan file.
 
-## Agent instructions
+## Development Workflow
 
-The plan file itself has session instructions for AI assistants at the top. **Read and follow those.** Key rules in brief:
+### Core Commands (using RTK for token optimization)
+All commands should be prefixed with `rtk` for 60-90% token savings:
+- `rtk git status` - Check repository status
+- `rtk git diff` - View changes
+- `rtk read <file>` - Read file contents
+- `rtk grep <pattern>` - Search for patterns
+- `rtk ls <path>` - List directory contents
 
-- **Don't invent progress.** Only trust logged rows in the Progress Tracker. If he mentions something that isn't logged, ask him to confirm/add it.
-- **Default language is Java.** All code discussion in Java unless stated otherwise.
-- **When he reports a session**, update the Progress Tracker row for that date (merge multiple problems from the same day into one row), tick checklist items, and update Stats Summary.
-- **Time budget is 1–2 hrs/day** with a full-time job. Keep suggestions sized to that.
-- **"Day" means calendar date**, not problem count. Multiple problems on the same date go in a single row with timestamped entries in the Notes column.
-- **The doc is a memory aid, not a contract.** If what he tells you now conflicts with what's written in the plan, trust him and update the doc accordingly.
-- After updating, suggest he copy the updated document back into his notes so state isn't lost between chats.
+### Primary Workflow
+1. Read/update `abhiroop_faang_prep_plan.md` to track progress
+2. After edits, changes are automatically committed and pushed via PostToolUse hook
+3. No manual git commands needed for plan updates (handled automatically)
 
-## Progressive load
+### Available Commands via RTK
+- File operations: `rtk read`, `rtk ls`, `rtk grep`, `rtk find`
+- Git operations: `rtk git status`, `rtk git diff`, `rtk git log`, `rtk git diff`
+- The `rtk proxy <cmd>` command runs raw commands without filtering (for debugging)
 
-Volume per day should increase gradually based on what's sustainable — don't jump to match a single strong day. But: if a problem finishes well under time (e.g. an Easy in <10 min), a follow-up in the same sitting is fine without waiting for the next session. Hard problems will naturally take longer; that's expected and not a reason to pile on more.
+## Code Architecture & Structure
 
-## Communication format
+### Single Source of Truth
+The entire repository revolves around one markdown file:
+- `abhiroop_faang_prep_plan.md` contains all planning, tracking, and progress information
+- Sections include: Progress Tracker, Stats Summary, Topic Checklists, Roadmap, etc.
+- Updates are made in-place during each study session
 
-- **Weekdays:** quick-stats only (time taken, approach landed on, any issues/hints needed). No full walkthrough. Keeps sessions inside the 1-hr budget.
-- **Once a week (weekend):** full interview-style walkthrough — talk through approach out loud, get pushed on trade-offs.
-- He writes running timestamped logs *as it happens* (e.g. "6:31: trying X", "6:46: found bug Y") — read these as a real-time trace, not a polished report.
-- **Confidence rating:** gauge it yourself from the solve — don't ask him. Factors: time vs target, bug count, whether approach was immediate or needed hints, code quality, difficulty level. State it when logging the session.
+### Automation Features
+- **Auto-commit**: PostToolUse hook automatically commits and pushes changes to the plan file
+- **RTK Integration**: All shell commands should use `rtk` prefix for token efficiency
+- **Section-based Organization**: The plan is organized into clearly defined sections for different aspects of interview prep
 
-## Git workflow
+### Key Sections in the Plan File
+1. **Progress Tracker** - Log of solved problems with timestamps, time taken, confidence ratings
+2. **Stats Summary** - Aggregated statistics (problems solved, streaks, strongest/weakest topics)
+3. **Topic Checklists** - Tracking progress across DSA and System Design topics
+4. **Roadmap** - Structured learning path organized by phases
+5. **Daily Structure** - Recommended time allocation for weekday vs weekend study
 
-After every plan update (progress logged, checklist ticked, stats synced), **commit and push automatically** — don't wait for the user to ask. Use a concise commit message summarizing what was solved/updated (e.g. "Day 2026-07-11: LC 424/20/704 solved, Sliding Window+Stack+Binary Search confirmed").
+## Important Guidelines
 
-## Updating the file
+### Progress Tracking Rules
+- Only trust what's logged in the Progress Tracker table
+- If user mentions progress not in the log, ask for confirmation before recording
+- Append new Progress Tracker rows at the top (newest first)
+- Merge multiple same-day problems into one row with timestamped entries
+- Keep Stats Summary in sync when logging progress
 
-- Append new Progress Tracker rows at the top of the table (newest first).
-- If multiple problems are solved on the same date, merge them into one row with the date. List each problem in the Problem/Activity column and put timestamps + details in Notes.
-- Keep the Stats Summary in sync when progress is logged.
-- Don't reformat or restructure existing sections without being asked.
+### Communication Patterns
+- **Weekdays**: Report quick-stats only (time taken, approach, issues/hints)
+- **Weekends**: Full interview-style walkthroughs (talk through approach out loud)
+- User logs sessions with timestamped notes during problem-solving (read as real-time trace)
 
+### Language & Tools
+- Default language is Java (user's primary work language)
+- LeetCode is the primary practice platform
+- Java is used for all code discussions unless otherwise specified
 
-<!-- headroom:rtk-instructions -->
-# RTK (Rust Token Killer) - Token-Optimized Commands
-
-When running shell commands, **always prefix with `rtk`**. This reduces context
-usage by 60-90% with zero behavior change. If rtk has no filter for a command,
-it passes through unchanged — so it is always safe to use.
-
-## Key Commands
-```bash
-# Git (59-80% savings)
-rtk git status          rtk git diff            rtk git log
-
-# Files & Search (60-75% savings)
-rtk ls <path>           rtk read <file>         rtk grep <pattern>
-rtk find <pattern>      rtk diff <file>
-
-# Test (90-99% savings) — shows failures only
-rtk pytest tests/       rtk cargo test          rtk test <cmd>
-
-# Build & Lint (80-90% savings) — shows errors only
-rtk tsc                 rtk lint                rtk cargo build
-rtk prettier --check    rtk mypy                rtk ruff check
-
-# Analysis (70-90% savings)
-rtk err <cmd>           rtk log <file>          rtk json <file>
-rtk summary <cmd>       rtk deps                rtk env
-
-# GitHub (26-87% savings)
-rtk gh pr view <n>      rtk gh run list         rtk gh issue list
-
-# Infrastructure (85% savings)
-rtk docker ps           rtk kubectl get         rtk docker logs <c>
-
-# Package managers (70-90% savings)
-rtk pip list            rtk pnpm install        rtk npm run <script>
-```
-
-## Rules
-- In command chains, prefix each segment: `rtk git add . && rtk git commit -m "msg"`
-- For debugging, use raw command without rtk prefix
-- `rtk proxy <cmd>` runs command without filtering but tracks usage
-<!-- /headroom:rtk-instructions -->
+### RTK-Specific Instructions
+- Always prefix shell commands with `rtk` for token optimization
+- Use `rtk proxy <cmd>` only when debugging is needed (bypasses filters)
+- Predefined RTK aliases provide significant token savings on common operations
