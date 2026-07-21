@@ -1,5 +1,5 @@
 # Abhiroop's FAANG Interview Prep — Living Plan
-*Last updated: 2026-07-19 (Phase 1, 9 topics confirmed — Graphs BFS/DFS completed, Dijkstra's next)*
+*Last updated: 2026-07-21 (Phase 1, 10 topics confirmed — Graphs Dijkstra completed, 1-D DP reinforcement in progress)*
 
 ---
 
@@ -82,13 +82,19 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 - **No choices:** never offer a menu of problems — just assign the next one. He'll self-select if he wants more or wants to skip ahead; the AI shouldn't let him bias toward comfortable territory.
 
 ## Currently Assigned
-**Phase 1 progress:** Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS all confirmed/closed.
+**Phase 1 progress:** Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path all confirmed/closed.
 
 **Next session:
-- Problem: [LC 743 — Network Delay Time (Medium)](https://leetcode.com/problems/network-delay-time/)
-- Why: Classic Dijkstra's algorithm application — builds on graph traversal skills, introduces weighted graphs and shortest path.
-- Language: Java, timed 20-25 min, no hints
+- Problem: [LC 70 — Climbing Stairs (Easy)](https://leetcode.com/problems/climbing-stairs/)
+- Why: Classic 1-D DP — simplest take/skip pattern, good confirm that the framing is locked in. Should be under 5 min.
+- Language: Java, timed 10-15 min, no hints
 - Report back: time taken, approach, any issues
+
+**2026-07-21 result (2):** LC 198 — House Robber (Medium) | 13 min (5:01–5:14) | 4.5/5 | Correct recurrence on first thought: dp[i] = max(nums[i] + dp[i-2], dp[i-1]). Two self-debugged bugs: (1) dp[1] = nums[1] instead of max(nums[0], nums[1]), (2) initial attempt used maxDpTillI_2 tracking (unnecessary for standard House Robber — dp[i-2] already contains optimal). Clean textbook solution after fix: 0ms (100th percentile). Strong signal — jumped straight to correct dp[i] framing with no hints, first time doing that for a DP problem.
+
+**2026-07-21 result (1):** LC 300 — Longest Increasing Subsequence (Medium, reinforcement rep) | 4 min (incl. ~10 min stuck before hint) | 3.5/5 | Recursion→tabulation gap narrowed significantly. Needed hint to reframe state as `dp[i]` = LIS ending at i (dropped tracking prev_index + count). Once framed, code was instant — 0 bugs, clean O(n²). Compare: Phase 0 same problem = 60 min + couldn't close without full solution walkthrough. One more rep should make this independent.
+
+**2026-07-19 result:** LC 743 — Network Delay Time (Medium) | 27 min | 4/5 | Implemented Dijkstra's algorithm with adjacency list and priority queue. Initial bug in weight indexing fixed; corrected logic to allow re-queuing nodes with shorter paths. Accepted: 177 ms (beats 5.06%), 49.76 MB (beats 22.86%). Noted potential micro-optimizations (reducing wrapper classes) but prioritized correctness first.
 
 **2026-07-18 result:** LC 226 (2 min, 0 bugs); LC 46 (20 min, 0 bugs, Set → boolean[] optimization done post-submit); LC 78 (15 min, 0 bugs, take-or-not-take pattern, 1ms). Backtracking confirmed — two templates covered (used-array for permutations, take-or-skip for subsets). Next: Graphs BFS/DFS.
 
@@ -142,11 +148,11 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 - [x] Trees — confirmed 2026-07-15 (LC104 DFS, LC102 BFS, LC98 BST validation)
 - [x] Heap / Priority Queue — tested Phase 0 (LC215), solid, first-ever Java PQ use
 - [x] Tries — tested Phase 0 (LC208), gap was Java mechanics only, resolved same session
-- [ ] Backtracking
+- [x] Backtracking
 - [x] Graphs — Union-Find — tested Phase 0 (LC684), fully intact, no rust
 - [x] Graphs — Topological Sort — tested + reinforced Phase 0 (LC207 → LC210), genuine new-concept gap closed
 - [x] Graphs — BFS/DFS (general)
-- [ ] Graphs — Dijkstra/Shortest Path
+- [x] Graphs — Dijkstra/Shortest Path
 - [ ] 1-D Dynamic Programming — tested Phase 0 (LC300), real unresolved gap (recursion→tabulation translation), needs a reinforcement rep when Phase 1 reaches DP
 - [ ] 2-D Dynamic Programming
 - [ ] Greedy
@@ -176,6 +182,9 @@ Append a new row after every session — newest at the top.
 
 | Date | Phase | Topic | Problem/Activity | Time | Confidence (1-5) | Notes |
 |------|-------|-------|-------------------|------|-------------------|-------|
+| 2026-07-21 | Phase 1 | 1-D DP | LC 198 — House Robber (Medium) | 13 min (5:01–5:14) | 4.5/5 | Correct recurrence on first thought: dp[i] = max(nums[i] + dp[i-2], dp[i-1]). Two self-debugged bugs: (1) dp[1] = nums[1] instead of max(nums[0], nums[1]), (2) initial attempt used maxDpTillI_2 tracking (unnecessary for standard House Robber — dp[i-2] already contains optimal). Clean textbook solution after fix: 0ms (100th percentile). Strong signal — jumped straight to correct dp[i] framing with no hints, first time doing that for a DP problem. |
+| 2026-07-21 | Phase 1 | 1-D DP | LC 300 — Longest Increasing Subsequence (Medium, reinforcement rep) | 4 min (incl. ~10 min stuck before hint) | 3.5/5 | Recursion→tabulation gap narrowed significantly. Needed hint to reframe state as `dp[i]` = LIS ending at i (dropped tracking prev_index + count). Once framed, code was instant — 0 bugs, clean O(n²). Compare: Phase 0 same problem = 60 min + couldn't close without full solution walkthrough. One more rep should make this independent. |
+| 2026-07-19 | Phase 1 | Graphs — Dijkstra/Shortest Path | LC 743 — Network Delay Time (Medium) | 27 min | 4/5 | Implemented Dijkstra's algorithm with adjacency list and priority queue. Initial bug in weight indexing fixed; corrected logic to allow re-queuing nodes with shorter paths. Accepted: 177 ms (beats 5.06%), 49.76 MB (beats 22.86%). Noted potential micro-optimizations (reducing wrapper classes) but prioritized correctness first. |
 | 2026-07-19 | Phase 1 | Graphs BFS/DFS | LC 200 — Number of Islands (Medium, graph DFS with in-place modification) | 15 min | 4/5 | Started with visited[][] approach (minor bugs fixed), switched to in-place grid modification for O(1) extra space. Accepted: 3 ms (beats 87.98%), 52.42 MB (beats 33.82%). Demonstrated DFS traversal, grid mutation technique, and complexity analysis. Graphs BFS/DFS section confirmed. |
 | 2026-07-18 | Phase 1 | Trees / Backtracking | LC 226 — Invert Binary Tree (Easy, 2 min, 0 bugs); LC 46 — Permutations (Medium, 20 min, 0 bugs, optimized to boolean[] post-submit); LC 78 — Subsets (Medium, 15 min, 0 bugs, take-or-not-take, 1ms) | ~37 min total | 5/5, 3/5→4/5, 4/5 | Three problems. **LC 226:** trivial confirm, trees closed. **LC 46:** HashSet+Set.copyOf first, then optimized to boolean[] used — standard template locked in. **LC 78:** take-or-not-take pattern, clean and fast. Two distinct backtracking templates confirmed: used-array (permutations) and take-or-skip (subsets). Next: Graphs BFS/DFS (LC 200). |
 | 2026-07-15 | Phase 1 | Trees | LC 104 — Maximum Depth of Binary Tree (Easy, 9 min, 0 bugs, 100th percentile); LC 102 — Binary Tree Level Order Traversal (Medium, 10 min, 0 bugs, 96th percentile); LC 98 — Validate BST (Medium, 23 min, 2 self-debugged bugs, 100th percentile) | ~42 min total | 4/5, 4/5, 3/5 | Three problems, one sitting. **LC 104:** DFS recursive, clean. **LC 102:** BFS with ArrayDeque, level-by-level via levelSize snapshot. **LC 98:** Recursive bounds validation. Two real BST traps hit: (1) only checked immediate parent nodes instead of propagating bounds through entire subtree — rewrote to pass min/max down correctly; (2) used Integer.MIN/MAX_VALUE as boundary sentinels which fails when tree contains actual min/max ints — fixed by switching to Long. Both self-diagnosed without hints. Trees section well covered: DFS, BFS, and BST validation all confirmed. |
@@ -192,13 +201,13 @@ Append a new row after every session — newest at the top.
 | 2026-07-03 | Phase 0 | DP | LC 300 - Longest Increasing Subsequence (Java, O(n²)) | ~60 min active (65 min elapsed − 5 min break) | 2/5 | Recursion (take/skip) came fast (~11 min), but recursion→bottom-up-table translation didn't click on its own — needed a hint on the `dp[i]` = LIS ending at i framing. Independently derived the "patience sorting / tails" dominance-pruning idea from first principles before being taught it — strong signal the underlying DP intuition is intact. Real gap identified: recursive-DP → tabulation translation fluency, not DP concepts themselves. Also flagged: comfort with `int[]` vs `List<Integer>` needs reps — reached for List by habit. |
 
 ## Stats Summary
-*(update periodically, not every session — last synced 2026-07-18)*
-- Total problems solved since restart: 23 (LC300/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200)
-- Active days so far: 12 of 16 calendar days (2026-07-03 to 07-19; 07-07, 07-13, 07-14, 07-16, 07-17, 07-?? were gaps)
-- Current streak: 2 days (07-18 to 07-19; previous streak was 5 days ending 07-12)
-- Current phase: Phase 1 — Pattern Reactivation. 9 sections confirmed/closed (Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS); Heap/PQ + Tries + Union-Find + Topological Sort from Phase 0 also solid.
-- Weakest topic: Dynamic Programming — real unresolved gap (recursion→tabulation translation), confidence 2/5, no reinforcement rep yet (scheduled for later in Phase 1 when the roadmap reaches DP)
-- Strongest topics: Union-Find (5/5, no rust at all), Arrays & Hashing (5/5, 4/5 — fast both times), Linked List (5/5 — LC206 in 3 min, LC2 in 10 min, both 100th percentile), Trees (5/5 — 4 problems, LC226 in 2 min), Graphs BFS/DFS (4/5 — LC200 solved with efficient in-place DFS)
+*(update periodically, not every session — last synced 2026-07-21)*
+- Total problems solved since restart: 26 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743)
+- Active days so far: 14 of 19 calendar days (2026-07-03 to 07-21; 07-07, 07-13, 07-14, 07-16, 07-17 were gaps)
+- Current streak: 3 days (07-19 to 07-21)
+- Current phase: Phase 1 — Pattern Reactivation. 10 sections confirmed/closed (Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path); Heap/PQ + Tries + Union-Find + Topological Sort from Phase 0 also solid. 1-D DP reinforcement in progress (LC300 rep + LC198 confirm).
+- Weakest topic: Dynamic Programming — was 2/5 at Phase 0, now climbing: LC300 rep (3.5/5 with hint), LC198 (4.5/5 no hints). Recursion→tabulation gap closing fast.
+- Strongest topics: Union-Find (5/5, no rust at all), Arrays & Hashing (5/5, 4/5 — fast both times), Linked List (5/5 — LC206 in 3 min, LC2 in 10 min, both 100th percentile), Trees (5/5 — 4 problems, LC226 in 2 min), Graphs BFS/DFS (4/5 — LC200 solved with efficient in-place DFS), Graphs — Dijkstra/Shortest Path (4/5 — LC743 solved with correct Dijkstra's implementation)
 - Recurring pattern to watch: Java collection API mixups (poll/peek, contains/isPresent) and "adjacency list" vs "adjacency matrix" terminology
 
 ---
