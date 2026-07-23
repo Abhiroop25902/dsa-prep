@@ -82,14 +82,15 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 - **No choices:** never offer a menu of problems — just assign the next one. He'll self-select if he wants more or wants to skip ahead; the AI shouldn't let him bias toward comfortable territory.
 
 ## Currently Assigned
-**Phase 1 progress:** Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path all confirmed/closed.
-**1-D DP progress:** LC70 confirm (5/5), LC198 confirm (4.5/5), LC300 rep (3.5/5 with hint).
+**Phase 1 progress:** Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path, 1-D DP all confirmed/closed.
 
 **Next session:
-- Problem: [LC 322 — Coin Change (Medium)](https://leetcode.com/problems/coin-change/)
-- Why: Different 1-D DP pattern — minimization over unbounded choices. Tests whether DP framing generalizes beyond take/skip patterns.
+- Problem: [LC 1143 — Longest Common Subsequence (Medium)](https://leetcode.com/problems/longest-common-subsequence/)
+- Why: First 2-D DP problem — tests whether DP framing generalizes to 2D table. Evaluate current state, no speed target.
 - Language: Java, timed 20-25 min, no hints
 - Report back: time taken, approach, any issues
+
+**2026-07-23 result:** LC 322 — Coin Change (Medium) | 18 min (5:52–6:10) | 4/5 | Correct dp[i] = min(dp[i-coin] + 1) framing from the start. Self-debugged: had issues with unreachable amounts (initialized dp array, caught -1 handling). Clean final code, 14ms (90th percentile). Strong signal — minimization-over-unbounded-choices pattern clicked independently. 1-D DP section closing: 5 problems (LC300/198/70/213/322), last 3 solved independently.
 
 **2026-07-22 result:** LC 70 — Climbing Stairs (Easy) | 11 min (5:47–5:58) | 5/5 | Initially thought 1 + dp[i-1] and 1 + dp[i-2] but caught duplicate-counting trap, manually derived dp[i] = dp[i-1] + dp[i-2] by walking small examples. Clean code, 0 bugs, 0ms (100th percentile). Good process: recognized flawed intuition → stepped back to examples → found correct recurrence independently.
 
@@ -156,7 +157,7 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 - [x] Graphs — Topological Sort — tested + reinforced Phase 0 (LC207 → LC210), genuine new-concept gap closed
 - [x] Graphs — BFS/DFS (general)
 - [x] Graphs — Dijkstra/Shortest Path
-- [ ] 1-D Dynamic Programming — tested Phase 0 (LC300), real unresolved gap (recursion→tabulation translation), needs a reinforcement rep when Phase 1 reaches DP
+- [x] 1-D Dynamic Programming — tested Phase 0 (LC300, 2/5), reinforced Phase 1 (LC198/70/213/322 — last 3 solved independently, 4-5/5). Section closed 2026-07-23.
 - [ ] 2-D Dynamic Programming
 - [ ] Greedy
 - [ ] Intervals
@@ -185,6 +186,7 @@ Append a new row after every session — newest at the top.
 
 | Date | Phase | Topic | Problem/Activity | Time | Confidence (1-5) | Notes |
 |------|-------|-------|-------------------|------|-------------------|-------|
+| 2026-07-23 | Phase 1 | 1-D DP | LC 322 — Coin Change (Medium) | 18 min (5:52–6:10) | 4/5 | Correct dp[i] = min(dp[i-coin] + 1) framing from the start. Self-debugged unreachable-amount handling. Clean final code, 14ms (90th percentile). Section closing — 5 problems done (LC300/198/70/213/322), last 3 solved independently. |
 | 2026-07-22 | Phase 1 | 1-D DP | LC 213 — House Robber II (Medium) | ~10-15 min | 3.5/5 | Needed hint to reduce circle to two linear subproblems: rob(nums[0..n-2]) and rob(nums[1..n-1]). Initial 2D DP idea was directionally correct but overengineered. Once framed, code was clean. Used List for slicing (minor, O(n) extra copying). 0ms (100th percentile). Circle→linear reduction needs to be automatic next time. |
 | 2026-07-22 | Phase 1 | 1-D DP | LC 70 — Climbing Stairs (Easy) | 11 min (5:47–5:58) | 5/5 | Initially thought 1 + dp[i-1] and 1 + dp[i-2] but caught duplicate-counting trap, manually derived dp[i] = dp[i-1] + dp[i-2] by walking small examples. Clean code, 0 bugs, 0ms (100th percentile). Good process: recognized flawed intuition → stepped back to examples → found correct recurrence independently. |
 | 2026-07-21 | Phase 1 | 1-D DP | LC 198 — House Robber (Medium) | 13 min (5:01–5:14) | 4.5/5 | Correct recurrence on first thought: dp[i] = max(nums[i] + dp[i-2], dp[i-1]). Two self-debugged bugs: (1) dp[1] = nums[1] instead of max(nums[0], nums[1]), (2) initial attempt used maxDpTillI_2 tracking (unnecessary for standard House Robber — dp[i-2] already contains optimal). Clean textbook solution after fix: 0ms (100th percentile). Strong signal — jumped straight to correct dp[i] framing with no hints, first time doing that for a DP problem. |
@@ -206,13 +208,13 @@ Append a new row after every session — newest at the top.
 | 2026-07-03 | Phase 0 | DP | LC 300 - Longest Increasing Subsequence (Java, O(n²)) | ~60 min active (65 min elapsed − 5 min break) | 2/5 | Recursion (take/skip) came fast (~11 min), but recursion→bottom-up-table translation didn't click on its own — needed a hint on the `dp[i]` = LIS ending at i framing. Independently derived the "patience sorting / tails" dominance-pruning idea from first principles before being taught it — strong signal the underlying DP intuition is intact. Real gap identified: recursive-DP → tabulation translation fluency, not DP concepts themselves. Also flagged: comfort with `int[]` vs `List<Integer>` needs reps — reached for List by habit. |
 
 ## Stats Summary
-*(update periodically, not every session — last synced 2026-07-21)*
-- Total problems solved since restart: 28 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743)
-- Active days so far: 15 of 20 calendar days (2026-07-03 to 07-22; 07-07, 07-13, 07-14, 07-16, 07-17 were gaps)
-- Current streak: 4 days (07-19 to 07-22)
-- Current phase: Phase 1 — Pattern Reactivation. 10 sections confirmed/closed (Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path); Heap/PQ + Tries + Union-Find + Topological Sort from Phase 0 also solid. 1-D DP reinforcement in progress (LC300 rep + LC198 confirm).
-- Weakest topic: Dynamic Programming — was 2/5 at Phase 0, now climbing: LC300 rep (3.5/5 with hint), LC198 (4.5/5 no hints). Recursion→tabulation gap closing fast.
-- Strongest topics: Union-Find (5/5, no rust at all), Arrays & Hashing (5/5, 4/5 — fast both times), Linked List (5/5 — LC206 in 3 min, LC2 in 10 min, both 100th percentile), Trees (5/5 — 4 problems, LC226 in 2 min), Graphs BFS/DFS (4/5 — LC200 solved with efficient in-place DFS), Graphs — Dijkstra/Shortest Path (4/5 — LC743 solved with correct Dijkstra's implementation)
+*(update periodically, not every session — last synced 2026-07-23)*
+- Total problems solved since restart: 29 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743/322)
+- Active days so far: 16 of 21 calendar days (2026-07-03 to 07-23; 07-07, 07-13, 07-14, 07-16, 07-17 were gaps)
+- Current streak: 5 days (07-19 to 07-23)
+- Current phase: Phase 1 — Pattern Reactivation. 11 sections confirmed/closed (Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path, 1-D DP); Heap/PQ + Tries + Union-Find + Topological Sort from Phase 0 also solid.
+- Weakest topic: formerly DP — now climbing. 1-D DP closed with 5 problems (LC300/198/70/213/322), last 3 solved independently. Moving to 2-D DP.
+- Strongest topics: Union-Find (5/5), Arrays & Hashing (5/5, 4/5), Linked List (5/5), Trees (5/5), 1-D DP (4/5 on final solves)
 - Recurring pattern to watch: Java collection API mixups (poll/peek, contains/isPresent) and "adjacency list" vs "adjacency matrix" terminology
 
 ---
