@@ -3,18 +3,13 @@
 Single markdown file (`abhiroop_faang_prep_plan.md`) — DSA + System Design interview prep tracker.
 No code, no build, no tests, no CI. All work is updating the plan file.
 
-## Commands (rtk prefix always)
+## Mem0 Identity
 
-```
-rtk git status    rtk git diff     rtk git log
-rtk read <file>   rtk grep <pat>   rtk ls <path>
-rtk git add . && rtk git commit -m "msg"
-```
+Always include `user_id="abhiroopmukherjee"` and `app_id="Abhiroop25902-dsa-prep"` in every `search_memories` filter and `add_memory` call.
 
 ## Workflow
 
-- **Auto-commit enabled** — PostToolUse hook commits + pushes plan edits. Never manually commit.
-- After each problem solve: update Progress Tracker (newest row first), Stats Summary, and Currently Assigned section.
+- **Commit after every problem solve.** After updating Progress Tracker, Stats Summary, and Currently Assigned: `rtk git add . && rtk git commit -m "Day YYYY-MM-DD: <problem> solved (<stats>)"`.
 - Merge same-day problems into one row with timestamped entries.
 - Only trust what's logged in the Progress Tracker. If user mentions unlogged progress, ask for confirmation.
 
@@ -28,8 +23,51 @@ rtk git add . && rtk git commit -m "msg"
 
 ## Key Conventions
 
-- Progress Tracker: newest rows at top.
-- Stats Summary: update periodically (not every session).
+- Progress Tracker: newest rows at top. Stats Summary: update periodically (not every session).
 - Currently Assigned: update with next problem after each solve.
 - Confidence: 1-5 scale, include with each logged problem.
 - Recurring gaps to watch: Java collection API mixups (poll/peek, contains/isPresent), "adjacency list" vs "adjacency matrix" terminology.
+
+
+<!-- headroom:rtk-instructions -->
+# RTK (Rust Token Killer) - Token-Optimized Commands
+
+When running shell commands, **always prefix with `rtk`**. This reduces context
+usage by 60-90% with zero behavior change. If rtk has no filter for a command,
+it passes through unchanged — so it is always safe to use.
+
+## Key Commands
+```bash
+# Git (59-80% savings)
+rtk git status          rtk git diff            rtk git log
+
+# Files & Search (60-75% savings)
+rtk ls <path>           rtk read <file>         rtk grep <pattern>
+rtk find <pattern>      rtk diff <file>
+
+# Test (90-99% savings) — shows failures only
+rtk pytest tests/       rtk cargo test          rtk test <cmd>
+
+# Build & Lint (80-90% savings) — shows errors only
+rtk tsc                 rtk lint                rtk cargo build
+rtk prettier --check    rtk mypy                rtk ruff check
+
+# Analysis (70-90% savings)
+rtk err <cmd>           rtk log <file>          rtk json <file>
+rtk summary <cmd>       rtk deps                rtk env
+
+# GitHub (26-87% savings)
+rtk gh pr view <n>      rtk gh run list         rtk gh issue list
+
+# Infrastructure (85% savings)
+rtk docker ps           rtk kubectl get         rtk docker logs <c>
+
+# Package managers (70-90% savings)
+rtk pip list            rtk pnpm install        rtk npm run <script>
+```
+
+## Rules
+- In command chains, prefix each segment: `rtk git add . && rtk git commit -m "msg"`
+- For debugging, use raw command without rtk prefix
+- `rtk proxy <cmd>` runs command without filtering but tracks usage
+<!-- /headroom:rtk-instructions -->

@@ -83,12 +83,15 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 
 ## Currently Assigned
 **Phase 1 progress:** Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path all confirmed/closed.
+**1-D DP progress:** LC70 confirm (5/5), LC198 confirm (4.5/5), LC300 rep (3.5/5 with hint).
 
 **Next session:
-- Problem: [LC 70 — Climbing Stairs (Easy)](https://leetcode.com/problems/climbing-stairs/)
-- Why: Classic 1-D DP — simplest take/skip pattern, good confirm that the framing is locked in. Should be under 5 min.
-- Language: Java, timed 10-15 min, no hints
+- Problem: [LC 322 — Coin Change (Medium)](https://leetcode.com/problems/coin-change/)
+- Why: Different 1-D DP pattern — minimization over unbounded choices. Tests whether DP framing generalizes beyond take/skip patterns.
+- Language: Java, timed 20-25 min, no hints
 - Report back: time taken, approach, any issues
+
+**2026-07-22 result:** LC 70 — Climbing Stairs (Easy) | 11 min (5:47–5:58) | 5/5 | Initially thought 1 + dp[i-1] and 1 + dp[i-2] but caught duplicate-counting trap, manually derived dp[i] = dp[i-1] + dp[i-2] by walking small examples. Clean code, 0 bugs, 0ms (100th percentile). Good process: recognized flawed intuition → stepped back to examples → found correct recurrence independently.
 
 **2026-07-21 result (2):** LC 198 — House Robber (Medium) | 13 min (5:01–5:14) | 4.5/5 | Correct recurrence on first thought: dp[i] = max(nums[i] + dp[i-2], dp[i-1]). Two self-debugged bugs: (1) dp[1] = nums[1] instead of max(nums[0], nums[1]), (2) initial attempt used maxDpTillI_2 tracking (unnecessary for standard House Robber — dp[i-2] already contains optimal). Clean textbook solution after fix: 0ms (100th percentile). Strong signal — jumped straight to correct dp[i] framing with no hints, first time doing that for a DP problem.
 
@@ -182,6 +185,8 @@ Append a new row after every session — newest at the top.
 
 | Date | Phase | Topic | Problem/Activity | Time | Confidence (1-5) | Notes |
 |------|-------|-------|-------------------|------|-------------------|-------|
+| 2026-07-22 | Phase 1 | 1-D DP | LC 213 — House Robber II (Medium) | ~10-15 min | 3.5/5 | Needed hint to reduce circle to two linear subproblems: rob(nums[0..n-2]) and rob(nums[1..n-1]). Initial 2D DP idea was directionally correct but overengineered. Once framed, code was clean. Used List for slicing (minor, O(n) extra copying). 0ms (100th percentile). Circle→linear reduction needs to be automatic next time. |
+| 2026-07-22 | Phase 1 | 1-D DP | LC 70 — Climbing Stairs (Easy) | 11 min (5:47–5:58) | 5/5 | Initially thought 1 + dp[i-1] and 1 + dp[i-2] but caught duplicate-counting trap, manually derived dp[i] = dp[i-1] + dp[i-2] by walking small examples. Clean code, 0 bugs, 0ms (100th percentile). Good process: recognized flawed intuition → stepped back to examples → found correct recurrence independently. |
 | 2026-07-21 | Phase 1 | 1-D DP | LC 198 — House Robber (Medium) | 13 min (5:01–5:14) | 4.5/5 | Correct recurrence on first thought: dp[i] = max(nums[i] + dp[i-2], dp[i-1]). Two self-debugged bugs: (1) dp[1] = nums[1] instead of max(nums[0], nums[1]), (2) initial attempt used maxDpTillI_2 tracking (unnecessary for standard House Robber — dp[i-2] already contains optimal). Clean textbook solution after fix: 0ms (100th percentile). Strong signal — jumped straight to correct dp[i] framing with no hints, first time doing that for a DP problem. |
 | 2026-07-21 | Phase 1 | 1-D DP | LC 300 — Longest Increasing Subsequence (Medium, reinforcement rep) | 4 min (incl. ~10 min stuck before hint) | 3.5/5 | Recursion→tabulation gap narrowed significantly. Needed hint to reframe state as `dp[i]` = LIS ending at i (dropped tracking prev_index + count). Once framed, code was instant — 0 bugs, clean O(n²). Compare: Phase 0 same problem = 60 min + couldn't close without full solution walkthrough. One more rep should make this independent. |
 | 2026-07-19 | Phase 1 | Graphs — Dijkstra/Shortest Path | LC 743 — Network Delay Time (Medium) | 27 min | 4/5 | Implemented Dijkstra's algorithm with adjacency list and priority queue. Initial bug in weight indexing fixed; corrected logic to allow re-queuing nodes with shorter paths. Accepted: 177 ms (beats 5.06%), 49.76 MB (beats 22.86%). Noted potential micro-optimizations (reducing wrapper classes) but prioritized correctness first. |
@@ -202,9 +207,9 @@ Append a new row after every session — newest at the top.
 
 ## Stats Summary
 *(update periodically, not every session — last synced 2026-07-21)*
-- Total problems solved since restart: 26 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743)
-- Active days so far: 14 of 19 calendar days (2026-07-03 to 07-21; 07-07, 07-13, 07-14, 07-16, 07-17 were gaps)
-- Current streak: 3 days (07-19 to 07-21)
+- Total problems solved since restart: 28 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743)
+- Active days so far: 15 of 20 calendar days (2026-07-03 to 07-22; 07-07, 07-13, 07-14, 07-16, 07-17 were gaps)
+- Current streak: 4 days (07-19 to 07-22)
 - Current phase: Phase 1 — Pattern Reactivation. 10 sections confirmed/closed (Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path); Heap/PQ + Tries + Union-Find + Topological Sort from Phase 0 also solid. 1-D DP reinforcement in progress (LC300 rep + LC198 confirm).
 - Weakest topic: Dynamic Programming — was 2/5 at Phase 0, now climbing: LC300 rep (3.5/5 with hint), LC198 (4.5/5 no hints). Recursion→tabulation gap closing fast.
 - Strongest topics: Union-Find (5/5, no rust at all), Arrays & Hashing (5/5, 4/5 — fast both times), Linked List (5/5 — LC206 in 3 min, LC2 in 10 min, both 100th percentile), Trees (5/5 — 4 problems, LC226 in 2 min), Graphs BFS/DFS (4/5 — LC200 solved with efficient in-place DFS), Graphs — Dijkstra/Shortest Path (4/5 — LC743 solved with correct Dijkstra's implementation)
