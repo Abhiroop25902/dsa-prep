@@ -85,12 +85,14 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 **Phase 1 progress:** Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path, 1-D DP all confirmed/closed.
 
 **Next session:
-- Problem: [LC 1143 — Longest Common Subsequence (Medium)](https://leetcode.com/problems/longest-common-subsequence/)
-- Why: First 2-D DP problem — tests whether DP framing generalizes to 2D table. Evaluate current state, no speed target.
-- Language: Java, timed 20-25 min, no hints
+- Problem: [LC 62 — Unique Paths (Medium)](https://leetcode.com/problems/unique-paths/)
+- Why: Simpler 2-D DP — combinatorial framing, confirms the 2-D table pattern generalized.
+- Language: Java, timed 15-20 min, no hints
 - Report back: time taken, approach, any issues
 
-**2026-07-23 result:** LC 322 — Coin Change (Medium) | 18 min (5:52–6:10) | 4/5 | Correct dp[i] = min(dp[i-coin] + 1) framing from the start. Self-debugged: had issues with unreachable amounts (initialized dp array, caught -1 handling). Clean final code, 14ms (90th percentile). Strong signal — minimization-over-unbounded-choices pattern clicked independently. 1-D DP section closing: 5 problems (LC300/198/70/213/322), last 3 solved independently.
+**2026-07-23 result (2):** LC 1143 — Longest Common Subsequence (Medium) | ~37 min (6:21–6:58) | 3/5 | Correct 2-D DP approach from the start: dp[i][j] match case was instant. Else case bug: initially only used dp[i][j-1] (skip str2 char), missed dp[i-1][j] (skip str1 char). Self-diagnosed after wrong-answer on submit. Once fixed with Math.max of both skip directions, clean solution with 0-padded table. 2-D DP pattern understood, else-case symmetry needs to be automatic.
+
+**2026-07-23 result (1):** LC 322 — Coin Change (Medium) | 18 min (5:52–6:10) | 4/5 | Correct dp[i] = min(dp[i-coin] + 1) framing from the start. Self-debugged unreachable-amount handling. Clean final code, 14ms (90th percentile). Strong signal — minimization-over-unbounded-choices pattern clicked independently. 1-D DP section closing: 5 problems (LC300/198/70/213/322), last 3 solved independently.
 
 **2026-07-22 result:** LC 70 — Climbing Stairs (Easy) | 11 min (5:47–5:58) | 5/5 | Initially thought 1 + dp[i-1] and 1 + dp[i-2] but caught duplicate-counting trap, manually derived dp[i] = dp[i-1] + dp[i-2] by walking small examples. Clean code, 0 bugs, 0ms (100th percentile). Good process: recognized flawed intuition → stepped back to examples → found correct recurrence independently.
 
@@ -186,6 +188,7 @@ Append a new row after every session — newest at the top.
 
 | Date | Phase | Topic | Problem/Activity | Time | Confidence (1-5) | Notes |
 |------|-------|-------|-------------------|------|-------------------|-------|
+| 2026-07-23 | Phase 1 | 2-D DP | LC 1143 — Longest Common Subsequence (Medium) | ~37 min (6:21–6:58) | 3/5 | 2-D DP approach instant. Else-case bug: dp[i][j-1] only, missed dp[i-1][j] symmetry. Self-diagnosed after wrong-answer. Clean fix with Math.max of both skips. |
 | 2026-07-23 | Phase 1 | 1-D DP | LC 322 — Coin Change (Medium) | 18 min (5:52–6:10) | 4/5 | Correct dp[i] = min(dp[i-coin] + 1) framing from the start. Self-debugged unreachable-amount handling. Clean final code, 14ms (90th percentile). Section closing — 5 problems done (LC300/198/70/213/322), last 3 solved independently. |
 | 2026-07-22 | Phase 1 | 1-D DP | LC 213 — House Robber II (Medium) | ~10-15 min | 3.5/5 | Needed hint to reduce circle to two linear subproblems: rob(nums[0..n-2]) and rob(nums[1..n-1]). Initial 2D DP idea was directionally correct but overengineered. Once framed, code was clean. Used List for slicing (minor, O(n) extra copying). 0ms (100th percentile). Circle→linear reduction needs to be automatic next time. |
 | 2026-07-22 | Phase 1 | 1-D DP | LC 70 — Climbing Stairs (Easy) | 11 min (5:47–5:58) | 5/5 | Initially thought 1 + dp[i-1] and 1 + dp[i-2] but caught duplicate-counting trap, manually derived dp[i] = dp[i-1] + dp[i-2] by walking small examples. Clean code, 0 bugs, 0ms (100th percentile). Good process: recognized flawed intuition → stepped back to examples → found correct recurrence independently. |
@@ -209,11 +212,11 @@ Append a new row after every session — newest at the top.
 
 ## Stats Summary
 *(update periodically, not every session — last synced 2026-07-23)*
-- Total problems solved since restart: 29 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743/322)
+- Total problems solved since restart: 30 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743/322/1143)
 - Active days so far: 16 of 21 calendar days (2026-07-03 to 07-23; 07-07, 07-13, 07-14, 07-16, 07-17 were gaps)
 - Current streak: 5 days (07-19 to 07-23)
-- Current phase: Phase 1 — Pattern Reactivation. 11 sections confirmed/closed (Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path, 1-D DP); Heap/PQ + Tries + Union-Find + Topological Sort from Phase 0 also solid.
-- Weakest topic: formerly DP — now climbing. 1-D DP closed with 5 problems (LC300/198/70/213/322), last 3 solved independently. Moving to 2-D DP.
+- Current phase: Phase 1 — Pattern Reactivation. 11 sections confirmed/closed (Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path, 1-D DP); Heap/PQ + Tries + Union-Find + Topological Sort from Phase 0 also solid. 2-D DP in progress.
+- Weakest topic: formerly DP — now climbing. 1-D DP closed (5 problems). 2-D DP started (LC1143, 3/5 — else-case symmetry needs reps).
 - Strongest topics: Union-Find (5/5), Arrays & Hashing (5/5, 4/5), Linked List (5/5), Trees (5/5), 1-D DP (4/5 on final solves)
 - Recurring pattern to watch: Java collection API mixups (poll/peek, contains/isPresent) and "adjacency list" vs "adjacency matrix" terminology
 
