@@ -85,13 +85,15 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 **Phase 1 progress:** Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path, 1-D DP all confirmed/closed. 2-D DP started (LC 1143 — LCS, 3/5).
 
 **Next session:
-- Topic: 2-D DP reinforcement
-- Problem: [LC 64 — Minimum Path Sum (Medium)](https://leetcode.com/problems/minimum-path-sum/)
-- Why: Same grid-traversal shape as Unique Paths, but adds a minimization objective — confirms both the table pattern and the transition to min-over-choices in 2-D.
+- Topic: 2-D DP — obstacle variation
+- Problem: [LC 63 — Unique Paths II (Medium)](https://leetcode.com/problems/unique-paths-ii/)
+- Why: Extends the same grid DP pattern with obstacles — tests whether the boundary/sentinel logic generalizes. Natural next step after Unique Paths + Min Path Sum.
 - Language: Java, timed 15-20 min, no hints
 - Report back: time taken, approach, any issues
 
-**2026-07-24 result:** LC 62 — Unique Paths (Medium) | 16 min (7:02–7:18) | 4/5 | Top-down memoization approach (recursion + dp[][]). Recognized pattern in ~4 min, coded cleanly in ~11 min. 0ms (100th percentile), 42.30 MB (29th percentile). O(mn) TC/SC. Bottom-up tabulation would save stack space but not worth optimizing — top-down was natural given the combinatorial framing.
+**2026-07-24 result (2):** LC 64 — Minimum Path Sum (Medium) | 13 min (7:20–7:33) | 4/5 | Same top-down memoization as Unique Paths. Recurrence: grid[i][j] + min(goLeft, goDown). Self-debugged: `dp[i][j] == 0` sentinel fails when grid cell value is 0 (valid path sum never recomputed). Fixed. 1ms (99.93%). Sentinal-guard bug = classic visited-vs-value mixup.
+
+**2026-07-24 result (1):** LC 62 — Unique Paths (Medium) | 16 min (7:02–7:18) | 4/5 | Top-down memoization (recursion + dp[][]). Recognized pattern in ~4 min, coded cleanly in ~11 min. 0ms (100th percentile), 42.30 MB (29th percentile). O(mn) TC/SC. Bottom-up tabulation would save stack space but not worth optimizing — top-down was natural given the combinatorial framing.
 
 **2026-07-23 result (2):** LC 1143 — Longest Common Subsequence (Medium) | ~37 min (6:21–6:58) | 3/5 | Correct 2-D DP approach from the start: dp[i][j] match case was instant. Else case bug: initially only used dp[i][j-1] (skip str2 char), missed dp[i-1][j] (skip str1 char). Self-diagnosed after wrong-answer on submit. Once fixed with Math.max of both skip directions, clean solution with 0-padded table. 2-D DP pattern understood, else-case symmetry needs to be automatic.
 
@@ -191,7 +193,7 @@ Append a new row after every session — newest at the top.
 
 | Date | Phase | Topic | Problem/Activity | Time | Confidence (1-5) | Notes |
 |------|-------|-------|-------------------|------|-------------------|-------|
-| 2026-07-24 | Phase 1 | 2-D DP | LC 62 — Unique Paths (Medium) | 16 min (7:02–7:18) | 4/5 | Top-down memoization. Recognized recursion+DP pattern in 4 min. 0ms (100th percentile). Combinatorial framing: dp[i][j] = dp[i-1][j] + dp[i][j-1]. |
+| 2026-07-24 | Phase 1 | 2-D DP | LC 64 — Minimum Path Sum (Medium, 7:20–7:33); LC 62 — Unique Paths (Medium, 7:02–7:18) | 31 min total | 4/5, 4/5 | Two problems. **LC 62:** Top-down memoization, 0ms (100th). **LC 64:** Same grid pattern, added minimization. Bug: `dp[i][j]==0` guard fails when grid value is 0 — used `==0` sentinel, hit false reuse. Fixed. 1ms (99.93%). |
 | 2026-07-23 | Phase 1 | 2-D DP | LC 1143 — Longest Common Subsequence (Medium) | ~37 min (6:21–6:58) | 3/5 | 2-D DP approach instant. Else-case bug: dp[i][j-1] only, missed dp[i-1][j] symmetry. Self-diagnosed after wrong-answer. Clean fix with Math.max of both skips. |
 | 2026-07-23 | Phase 1 | 1-D DP | LC 322 — Coin Change (Medium) | 18 min (5:52–6:10) | 4/5 | Correct dp[i] = min(dp[i-coin] + 1) framing from the start. Self-debugged unreachable-amount handling. Clean final code, 14ms (90th percentile). Section closing — 5 problems done (LC300/198/70/213/322), last 3 solved independently. |
 | 2026-07-22 | Phase 1 | 1-D DP | LC 213 — House Robber II (Medium) | ~10-15 min | 3.5/5 | Needed hint to reduce circle to two linear subproblems: rob(nums[0..n-2]) and rob(nums[1..n-1]). Initial 2D DP idea was directionally correct but overengineered. Once framed, code was clean. Used List for slicing (minor, O(n) extra copying). 0ms (100th percentile). Circle→linear reduction needs to be automatic next time. |
@@ -216,7 +218,7 @@ Append a new row after every session — newest at the top.
 
 ## Stats Summary
 *(update periodically, not every session — last synced 2026-07-23)*
-- Total problems solved since restart: 31 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743/322/1143/62)
+- Total problems solved since restart: 32 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743/322/1143/62/64)
 - Active days so far: 17 of 22 calendar days (2026-07-03 to 07-24; 07-07, 07-13, 07-14, 07-16, 07-17 were gaps)
 - Current streak: 6 days (07-19 to 07-24)
 - Current phase: Phase 1 — Pattern Reactivation. 11 sections confirmed/closed (Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path, 1-D DP); Heap/PQ + Tries + Union-Find + Topological Sort from Phase 0 also solid. 2-D DP in progress.
