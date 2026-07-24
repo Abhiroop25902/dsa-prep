@@ -9,6 +9,7 @@ Always include `user_id="abhiroopmukherjee"` and `app_id="Abhiroop25902-dsa-prep
 
 ## Workflow
 
+- **Session start:** `rtk git status` — if uncommitted changes exist from a prior day, commit them first: `rtk git add -A && rtk git commit -m "Day YYYY-MM-DD: carryover from previous session"`. Then read the plan file to pick up where you left off.
 - **Commit after every problem solve.** After updating Progress Tracker, Stats Summary, and Currently Assigned: `rtk git add . && rtk git commit -m "Day YYYY-MM-DD: <problem> solved (<stats>)"`.
 - Merge same-day problems into one row with timestamped entries.
 - Only trust what's logged in the Progress Tracker. If user mentions unlogged progress, ask for confirmation.
