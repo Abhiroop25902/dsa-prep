@@ -1,5 +1,5 @@
 # Abhiroop's FAANG Interview Prep — Living Plan
-*Last updated: 2026-07-25 (Phase 1, 10 topics confirmed — Graphs Dijkstra completed, 1-D DP reinforcement in progress)*
+*Last updated: 2026-07-26 (Phase 1, 12 sections confirmed/closed — 2-D DP in progress, 5 problems done)*
 
 ---
 
@@ -82,16 +82,11 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 - **No choices:** never offer a menu of problems — just assign the next one. He'll self-select if he wants more or wants to skip ahead; the AI shouldn't let him bias toward comfortable territory.
 
 ## Currently Assigned
-**Phase 1 progress:** Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path, 1-D DP all confirmed/closed. 2-D DP in progress (LC 1143, 62, 64, 63).
+**Phase 1 progress:** Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path, 1-D DP all confirmed/closed. 2-D DP in progress (LC 1143, 62, 64, 63, 72).
+
+**2026-07-26 result:** LC 72 — Edit Distance (Medium→Hard) | 14 min (11:15–12:11, incl. hint at 11:40) | 3.5/5 | Needed hint on match-case recurrence (no +1 cost, it's free). Self-fixed after that. Accepted: 5ms (67.50th), 47.18MB (53.59th). String DP pattern understood but need speed — 40 min stuck on recurrence is too long for interview pace.
 
 **2026-07-25 result:** LC 63 — Unique Paths II (Medium) | 9 min (10:58–11:07) | 4/5 | Correct recurrence from prior grid DP pattern. Bug: start-position obstacle not handled. 5ms (2.82%). Obstacle variation confirmed.
-
-**Next session:
-- Topic: 2-D DP — string DP
-- Problem: [LC 72 — Edit Distance (Medium → Hard)](https://leetcode.com/problems/edit-distance/)
-- Why: Classic 2-D DP on strings (instead of grids). Tests whether the table-filling intuition generalizes beyond grid paths to edit operations (insert/delete/replace). One of the most frequently asked DP problems.
-- Language: Java, timed 20-25 min, no hints
-- Report back: time taken, approach, any issues
 
 **2026-07-24 result (2):** LC 64 — Minimum Path Sum (Medium) | 13 min (7:20–7:33) | 4/5 | Same top-down memoization as Unique Paths. Recurrence: grid[i][j] + min(goLeft, goDown). Self-debugged: `dp[i][j] == 0` sentinel fails when grid cell value is 0 (valid path sum never recomputed). Fixed. 1ms (99.93%). Sentinal-guard bug = classic visited-vs-value mixup.
 
@@ -195,7 +190,8 @@ Append a new row after every session — newest at the top.
 
 | Date | Phase | Topic | Problem/Activity | Time | Confidence (1-5) | Notes |
 |------|-------|-------|-------------------|------|-------------------|-------|
-| 2026-07-25 | Phase 1 | 2-D DP | LC 63 — Unique Paths II (Medium, 10:58–11:07) | 9 min | 4/5 | Correct recurrence landed instantly: dp[i][j] = (recur(i+1,j) if not obstacle/bound) + (recur(i,j+1) if not obstacle/bound) — same grid DP pattern as Unique Paths + Min Path Sum. Bug: missed start-position obstacle (return 0 if obstacleGrid[0][0]==1). Self-fixed before resubmit. 5ms (2.82%), 43.44 MB (64.85%). Bottom-up would save stack space but recurrence is correct regardless. |
+| 2026-07-26 | Phase 1 | 2-D DP | LC 72 — Edit Distance (Medium→Hard, 11:15–12:11, hint at 11:40) | 14 min solve (40 min elapsed incl. stuck time) | 3.5/5 | Confused on match-case: thought it needed +1 cost. Hint: when chars match, cost is 0 (carry diagonal forward). Once clicked, coded cleanly — base cases as string-to-empty distance, else min of insert/delete/replace+1. Accepted: 5ms (67.50th), 47.18MB (53.59th). Took too long for interview pace — string DP recurrence still needs reps. |
+| 2026-07-25 | Phase 1 | 2-D DP | LC 63 — Unique Paths II (Medium, 10:58–11:07) | 9 min | 4/5 | Correct recurrence landed instantly: dp[i][j] = (recur(i+1,j) if not obstacle/bound) + (recur(i,j+1) if not obstacle/bound) — same grid DP pattern. Bug: missed start-position obstacle (return 0 if obstacleGrid[0][0]==1). Self-fixed. 5ms (2.82%), 43.44 MB (64.85%). |
 | 2026-07-24 | Phase 1 | 2-D DP | LC 64 — Minimum Path Sum (Medium, 7:20–7:33); LC 62 — Unique Paths (Medium, 7:02–7:18) | 31 min total | 4/5, 4/5 | Two problems. **LC 62:** Top-down memoization, 0ms (100th). **LC 64:** Same grid pattern, added minimization. Bug: `dp[i][j]==0` guard fails when grid value is 0 — used `==0` sentinel, hit false reuse. Fixed. 1ms (99.93%). |
 | 2026-07-23 | Phase 1 | 2-D DP | LC 1143 — Longest Common Subsequence (Medium) | ~37 min (6:21–6:58) | 3/5 | 2-D DP approach instant. Else-case bug: dp[i][j-1] only, missed dp[i-1][j] symmetry. Self-diagnosed after wrong-answer. Clean fix with Math.max of both skips. |
 | 2026-07-23 | Phase 1 | 1-D DP | LC 322 — Coin Change (Medium) | 18 min (5:52–6:10) | 4/5 | Correct dp[i] = min(dp[i-coin] + 1) framing from the start. Self-debugged unreachable-amount handling. Clean final code, 14ms (90th percentile). Section closing — 5 problems done (LC300/198/70/213/322), last 3 solved independently. |
@@ -220,12 +216,12 @@ Append a new row after every session — newest at the top.
 | 2026-07-03 | Phase 0 | DP | LC 300 - Longest Increasing Subsequence (Java, O(n²)) | ~60 min active (65 min elapsed − 5 min break) | 2/5 | Recursion (take/skip) came fast (~11 min), but recursion→bottom-up-table translation didn't click on its own — needed a hint on the `dp[i]` = LIS ending at i framing. Independently derived the "patience sorting / tails" dominance-pruning idea from first principles before being taught it — strong signal the underlying DP intuition is intact. Real gap identified: recursive-DP → tabulation translation fluency, not DP concepts themselves. Also flagged: comfort with `int[]` vs `List<Integer>` needs reps — reached for List by habit. |
 
 ## Stats Summary
-*(update periodically, not every session — last synced 2026-07-23)*
-- Total problems solved since restart: 33 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743/322/1143/62/64/63)
-- Active days so far: 18 of 25 calendar days (2026-07-03 to 07-25; 07-07, 07-13, 07-14, 07-16, 07-17, 07-20, 07-22 were gaps — wait, verify)
-- Current streak: 5 days (07-21 to 07-25)
-- Current phase: Phase 1 — Pattern Reactivation. 11 sections confirmed/closed (Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path, 1-D DP); Heap/PQ + Tries + Union-Find + Topological Sort from Phase 0 also solid. 2-D DP in progress.
-- Weakest topic: formerly DP — now climbing. 1-D DP closed (5 problems). 2-D DP started (LC1143, 3/5 — else-case symmetry needs reps).
+*(update periodically, not every session — last synced 2026-07-26)*
+- Total problems solved since restart: 35 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743/322/1143/62/64/63/72)
+- Active days so far: 19 of 24 calendar days (2026-07-03 to 07-26; 07-07, 07-13, 07-14, 07-16, 07-17, 07-20, 07-22 were gaps — wait, verify)
+- Current streak: 6 days (07-21 to 07-26)
+- Current phase: Phase 1 — Pattern Reactivation. 12 sections confirmed/closed (Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path, 1-D DP, 2-D DP started); Heap/PQ + Tries + Union-Find + Topological Sort from Phase 0 also solid. 2-D DP in progress.
+- Weakest topic: formerly DP — now climbing. 1-D DP closed (5 problems). 2-D DP in progress (LC1143/62/64/63/72) — string DP recurrence speed needs work.
 - Strongest topics: Union-Find (5/5), Arrays & Hashing (5/5, 4/5), Linked List (5/5), Trees (5/5), 1-D DP (4/5 on final solves)
 - Recurring pattern to watch: Java collection API mixups (poll/peek, contains/isPresent) and "adjacency list" vs "adjacency matrix" terminology
 
