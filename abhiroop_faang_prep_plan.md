@@ -84,7 +84,13 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 ## Currently Assigned
 **Phase 1 progress:** Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path, 1-D DP all confirmed/closed. 2-D DP in progress (LC 1143, 62, 64, 63, 72).
 
-**2026-07-26 result:** LC 72 — Edit Distance (Medium→Hard) | 14 min (11:15–12:11, incl. hint at 11:40) | 3.5/5 | Needed hint on match-case recurrence (no +1 cost, it's free). Self-fixed after that. Accepted: 5ms (67.50th), 47.18MB (53.59th). String DP pattern understood but need speed — 40 min stuck on recurrence is too long for interview pace.
+**2026-07-26 result:** LC 72 — Edit Distance (Medium→Hard) | 14 min solve (40 min elapsed 11:15–12:11, hint at 11:40) | 3.5/5 | Needed hint on match-case recurrence (free diagonal carry). Self-fixed after. Accepted: 5ms (67.50th), 47.18MB (53.59th). String DP recurrence needs speed — grid DP solid (4/5), string DP 2/2 needing hints.
+
+**Next session:**
+- Topic: 2-D DP — string DP reinforcement
+- Problem: [LC 516 — Longest Palindromic Subsequence (Medium)](https://leetcode.com/problems/longest-palindromic-subsequence/)
+- Why: Different string DP flavor — tests palindrome table-filling adaptation. Grid DP is locked, string DP needs one more rep before moving on.
+- Language: Java, timed 20-25 min, no hints
 
 **2026-07-25 result:** LC 63 — Unique Paths II (Medium) | 9 min (10:58–11:07) | 4/5 | Correct recurrence from prior grid DP pattern. Bug: start-position obstacle not handled. 5ms (2.82%). Obstacle variation confirmed.
 
