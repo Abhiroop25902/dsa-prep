@@ -84,13 +84,13 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 ## Currently Assigned
 **Phase 1 progress:** Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path, 1-D DP all confirmed/closed. 2-D DP in progress (LC 1143, 62, 64, 63, 72, 5, 97).
 
-**2026-07-27 result:** LC 5 — Longest Palindromic Substring (Medium, 12 min, 4/5, BFS center-expansion). LC 97 — Interleaving String (Medium, ~20 min, 2.5/5, needed hint for memoization state, low confidence).
+**2026-07-30 result:** LC 516 — Longest Palindromic Subsequence (Medium, ~48 min, 3/5). Center-expansion DP approach ported from LC 5. TLE bug: `int[][]` sentinel 0 conflated uncomputed with answer-is-0 (same as LC 64). Fixed with `-1`. 102ms (5.07%).
 
 **Next session:**
-- Topic: 2-D DP — string DP reinforcement
-- Problem: [LC 516 — Longest Palindromic Subsequence (Medium)](https://leetcode.com/problems/longest-palindromic-subsequence/)
+- Topic: Greedy
+- Problem: [LC 53 — Maximum Subarray (Medium)](https://leetcode.com/problems/maximum-subarray/)
 
-**2026-07-25 result:** LC 63 — Unique Paths II (Medium) | 9 min (10:58–11:07) | 4/5 | Correct recurrence from prior grid DP pattern. Bug: start-position obstacle not handled. 5ms (2.82%). Obstacle variation confirmed.
+**2026-07-27 result:** LC 5 — Longest Palindromic Substring (Medium, 12 min, 4/5, BFS center-expansion). LC 97 — Interleaving String (Medium, ~20 min, 2.5/5, needed hint for memoization state, low confidence).
 
 **2026-07-24 result (2):** LC 64 — Minimum Path Sum (Medium) | 13 min (7:20–7:33) | 4/5 | Same top-down memoization as Unique Paths. Recurrence: grid[i][j] + min(goLeft, goDown). Self-debugged: `dp[i][j] == 0` sentinel fails when grid cell value is 0 (valid path sum never recomputed). Fixed. 1ms (99.93%). Sentinal-guard bug = classic visited-vs-value mixup.
 
@@ -194,6 +194,7 @@ Append a new row after every session — newest at the top.
 
 | Date | Phase | Topic | Problem/Activity | Time | Confidence (1-5) | Notes |
 |------|-------|-------|-------------------|------|-------------------|-------|
+| 2026-07-30 | Phase 1 | 2-D DP | LC 516 — Longest Palindromic Subsequence (Medium, 6:12–7:00) | ~48 min | 3/5 | Center-expansion approach (ported from LC 5) doesn't naturally fit subsequences — recurrence should shrink inward, not expand outward. TLE bug: `int[][]` sentinel `0` conflated "uncomputed" with "answer is 0" (same gotcha as LC 64). Fixed with `-1` sentinel. 102ms (5.07%). |
 | 2026-07-27 | Phase 1 | 2-D DP | LC 5 — Longest Palindromic Substring (Medium, 7:19–7:31); LC 97 — Interleaving String (Medium, 7:46–8:02+) | 12 min, ~20 min | 4/5, 2.5/5 | **LC 5:** BFS/queue center-expansion, self-derived. 49ms (30.64%), 46.22MB (40.62%). **LC 97:** DFS without memo → TLE on 106/107. Hint: subproblem is (s1Idx, s2Idx) since s3Idx = s1Idx+s2Idx. Fixed with `HashMap<String, Boolean>` cache (string key). Still hit `int[]` key Java gotcha same as LC 49. Accepted: 7ms (23.87%), 45.73MB (7.33%). Low confidence — 2-D DP memoization pattern recognition needs work. |
 | 2026-07-26 | Phase 1 | 2-D DP | LC 72 — Edit Distance (Medium→Hard, 11:15–12:11, hint at 11:40) | 14 min solve (40 min elapsed incl. stuck time) | 3.5/5 | Confused on match-case: thought it needed +1 cost. Hint: when chars match, cost is 0 (carry diagonal forward). Once clicked, coded cleanly — base cases as string-to-empty distance, else min of insert/delete/replace+1. Accepted: 5ms (67.50th), 47.18MB (53.59th). Took too long for interview pace — string DP recurrence still needs reps. |
 | 2026-07-25 | Phase 1 | 2-D DP | LC 63 — Unique Paths II (Medium, 10:58–11:07) | 9 min | 4/5 | Correct recurrence landed instantly: dp[i][j] = (recur(i+1,j) if not obstacle/bound) + (recur(i,j+1) if not obstacle/bound) — same grid DP pattern. Bug: missed start-position obstacle (return 0 if obstacleGrid[0][0]==1). Self-fixed. 5ms (2.82%), 43.44 MB (64.85%). |
