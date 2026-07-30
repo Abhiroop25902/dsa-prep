@@ -28,6 +28,18 @@ Always include `user_id="abhiroopmukherjee"` and `app_id="Abhiroop25902-dsa-prep
 - Currently Assigned: update with next problem after each solve.
 - Confidence: 1-5 scale, include with each logged problem.
 - Recurring gaps to watch: Java collection API mixups (poll/peek, contains/isPresent), "adjacency list" vs "adjacency matrix" terminology.
+- **`int[][]` sentinel gotcha:** `dp[i][j] == 0` conflates "uncomputed" with "answer is 0" — use `-1` sentinel. Already tripped on LC 64 and LC 516. Watch for this in any DP with valid 0 values.
+
+## Session History
+
+Keep a brief rolling log of key session decisions/outcomes for context continuity. Newest first.
+
+| Date | Problems | Key Learnings |
+|------|----------|---------------|
+| 2026-07-30 | LC 516 — Longest Palindromic Subsequence | Center-expansion fails for subsequences — must shrink inward (`dp[i][j]` from `dp[i+1][j-1]`). -1 sentinel fix for int[][] cache. 31ms (80%). Moving to Greedy next. |
+| 2026-07-27 | LC 5, LC 97 | BFS center-expansion for palindromic substrings. HashMap<String, Boolean> memo for Interleaving String. |
+| 2026-07-25 | LC 63 | Start-position obstacle bug. |
+| 2026-07-24 | LC 62, LC 64 | dp[i][j]==0 sentinel bug caught. |
 
 
 <!-- headroom:rtk-instructions -->
