@@ -1,12 +1,24 @@
 # Abhiroop's FAANG Interview Prep — Living Plan
-*Last updated: 2026-07-26 (Phase 1, 12 sections confirmed/closed — 2-D DP in progress, 5 problems done)*
+*Last updated: 2026-08-02*
+
+---
+
+## Current State
+- **Last solved:** LC 45 — Jump Game II (2026-08-02, confidence 4.5/5)
+- **Next problem:** [LC 56 — Merge Intervals (Medium)](https://leetcode.com/problems/merge-intervals/)
+- **Current topic:** Greedy
+- **Current phase:** Phase 1 — Pattern Reactivation
+- **Problems solved since restart:** 40
+- **Topic status:** Greedy — `in progress`; 2-D DP — `in progress`; all earlier sections — `confirmed/closed`
+- **Active learning gaps:** Kadane's invariant intuition; 2-D DP memoization pattern recognition
+- **Last session:** Three greedy problems completed independently or with one hint: LC 53, LC 55, LC 45.
 
 ---
 
 ## For any Claude session reading this (read this part first)
 This is Abhiroop Mukherjee's living DSA + System Design interview-prep tracker. If he's pasted this into a fresh chat, here's what to know before responding:
 
-1. **Don't invent progress.** Only trust what's logged in the Progress Tracker below. If he mentions doing something that isn't logged, ask him to confirm/add it — don't assume or extrapolate.
+1. **Don't invent progress.** Trust the user's current message first; use `Current State` for the current pointer and the Progress Tracker for historical confirmation. If he mentions older unlogged progress, ask him to confirm/add it — don't assume or extrapolate.
 2. **Time budget is 1-2 hrs/day, full-time job.** He's an Application Software Engineer 2 at Oracle (NetSuite/ERP stack), ~3 years experience. Keep suggestions sized to the Daily Structure section — don't pile on more.
 3. **He is not a beginner.** His LeetCode history (557 problems in C++, 220 in Java, 95 in Python3, real depth in Dynamic Programming/Backtracking/Graphs, 500-day streak badge) shows a strong prior base that went rusty from ~2-3 years of enterprise work — not someone learning DSA from scratch. Reactivation and speed, not re-teaching fundamentals, is the job.
 4. **Practice language is Java** (see Language Decision below) — default all code discussion to Java unless he says otherwise.
@@ -82,43 +94,10 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 - **No choices:** never offer a menu of problems — just assign the next one. He'll self-select if he wants more or wants to skip ahead; the AI shouldn't let him bias toward comfortable territory.
 
 ## Currently Assigned
-**Phase 1 progress:** Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path, 1-D DP all confirmed/closed. 2-D DP in progress (LC 1143, 62, 64, 63, 72, 5, 97). Greedy in progress (LC 53, 55, 45).
+**Topic:** Greedy
+**Problem:** [LC 56 — Merge Intervals (Medium)](https://leetcode.com/problems/merge-intervals/)
 
-**2026-08-02 result:** LC 45 — Jump Game II (Medium, ~16 min, 4.5/5). Reframed BFS as level-order frontier scanning: all indices reachable in the current number of jumps form one range, and scanning that range determines the farthest boundary for the next jump. Accepted in 1ms (99.73%), 47.09MB (88.85%). O(n) time, O(1) extra space.
-
-**2026-08-02 result:** LC 55 — Jump Game (Medium, 3 min, 4.5/5). Independently derived the greedy invariant: maintain the farthest reachable index and fail if the scan reaches an index beyond it. Accepted in 2ms (88.66%), 47.39MB (98.75%). O(n) time, O(1) extra space.
-
-**2026-08-02 result:** LC 53 — Maximum Subarray (Medium, ~17 min, 3.5/5). Implemented Kadane's algorithm after a hint. Correctly identified the O(n^3) brute force and O(n^2) prefix-sum approaches as too slow. Needs to solidify the invariant/intuition behind keeping the best subarray ending at the current index. O(n) time, O(1) extra space.
-
-**2026-07-30 result:** LC 516 — Longest Palindromic Subsequence (Medium, ~48 min, 3/5). Center-expansion DP approach ported from LC 5. TLE bug: `int[][]` sentinel 0 conflated uncomputed with answer-is-0 (same as LC 64). Fixed with `-1`. 102ms (5.07%).
-
-**Next session:**
-- Topic: Greedy
-- Problem: [LC 56 — Merge Intervals (Medium)](https://leetcode.com/problems/merge-intervals/)
-
-**2026-07-27 result:** LC 5 — Longest Palindromic Substring (Medium, 12 min, 4/5, BFS center-expansion). LC 97 — Interleaving String (Medium, ~20 min, 2.5/5, needed hint for memoization state, low confidence).
-
-**2026-07-24 result (2):** LC 64 — Minimum Path Sum (Medium) | 13 min (7:20–7:33) | 4/5 | Same top-down memoization as Unique Paths. Recurrence: grid[i][j] + min(goLeft, goDown). Self-debugged: `dp[i][j] == 0` sentinel fails when grid cell value is 0 (valid path sum never recomputed). Fixed. 1ms (99.93%). Sentinal-guard bug = classic visited-vs-value mixup.
-
-**2026-07-24 result (1):** LC 62 — Unique Paths (Medium) | 16 min (7:02–7:18) | 4/5 | Top-down memoization (recursion + dp[][]). Recognized pattern in ~4 min, coded cleanly in ~11 min. 0ms (100th percentile), 42.30 MB (29th percentile). O(mn) TC/SC. Bottom-up tabulation would save stack space but not worth optimizing — top-down was natural given the combinatorial framing.
-
-**2026-07-23 result (2):** LC 1143 — Longest Common Subsequence (Medium) | ~37 min (6:21–6:58) | 3/5 | Correct 2-D DP approach from the start: dp[i][j] match case was instant. Else case bug: initially only used dp[i][j-1] (skip str2 char), missed dp[i-1][j] (skip str1 char). Self-diagnosed after wrong-answer on submit. Once fixed with Math.max of both skip directions, clean solution with 0-padded table. 2-D DP pattern understood, else-case symmetry needs to be automatic.
-
-**2026-07-23 result (1):** LC 322 — Coin Change (Medium) | 18 min (5:52–6:10) | 4/5 | Correct dp[i] = min(dp[i-coin] + 1) framing from the start. Self-debugged unreachable-amount handling. Clean final code, 14ms (90th percentile). Strong signal — minimization-over-unbounded-choices pattern clicked independently. 1-D DP section closing: 5 problems (LC300/198/70/213/322), last 3 solved independently.
-
-**2026-07-22 result:** LC 70 — Climbing Stairs (Easy) | 11 min (5:47–5:58) | 5/5 | Initially thought 1 + dp[i-1] and 1 + dp[i-2] but caught duplicate-counting trap, manually derived dp[i] = dp[i-1] + dp[i-2] by walking small examples. Clean code, 0 bugs, 0ms (100th percentile). Good process: recognized flawed intuition → stepped back to examples → found correct recurrence independently.
-
-**2026-07-21 result (2):** LC 198 — House Robber (Medium) | 13 min (5:01–5:14) | 4.5/5 | Correct recurrence on first thought: dp[i] = max(nums[i] + dp[i-2], dp[i-1]). Two self-debugged bugs: (1) dp[1] = nums[1] instead of max(nums[0], nums[1]), (2) initial attempt used maxDpTillI_2 tracking (unnecessary for standard House Robber — dp[i-2] already contains optimal). Clean textbook solution after fix: 0ms (100th percentile). Strong signal — jumped straight to correct dp[i] framing with no hints, first time doing that for a DP problem.
-
-**2026-07-21 result (1):** LC 300 — Longest Increasing Subsequence (Medium, reinforcement rep) | 4 min (incl. ~10 min stuck before hint) | 3.5/5 | Recursion→tabulation gap narrowed significantly. Needed hint to reframe state as `dp[i]` = LIS ending at i (dropped tracking prev_index + count). Once framed, code was instant — 0 bugs, clean O(n²). Compare: Phase 0 same problem = 60 min + couldn't close without full solution walkthrough. One more rep should make this independent.
-
-**2026-07-19 result:** LC 743 — Network Delay Time (Medium) | 27 min | 4/5 | Implemented Dijkstra's algorithm with adjacency list and priority queue. Initial bug in weight indexing fixed; corrected logic to allow re-queuing nodes with shorter paths. Accepted: 177 ms (beats 5.06%), 49.76 MB (beats 22.86%). Noted potential micro-optimizations (reducing wrapper classes) but prioritized correctness first.
-
-**2026-07-18 result:** LC 226 (2 min, 0 bugs); LC 46 (20 min, 0 bugs, Set → boolean[] optimization done post-submit); LC 78 (15 min, 0 bugs, take-or-not-take pattern, 1ms). Backtracking confirmed — two templates covered (used-array for permutations, take-or-skip for subsets). Next: Graphs BFS/DFS.
-
-**2026-07-15 result:** LC 104 — Maximum Depth of Binary Tree (9 min, DFS recursive, 0 bugs, 100th percentile). LC 102 — Binary Tree Level Order Traversal (10 min, BFS with queue, 0 bugs, 96th percentile). LC 98 — Validate BST (23 min, recursive bounds with long, 2 self-debugged bugs, 100th percentile). Trees DFS + BFS + BST validation done. LC 98 had two classic traps: missed subtree-wide bounds propagation (fixed by passing min/max down), then Integer overflow on boundary sentinels (fixed by switching to Long).
-
-**2026-07-12 result:** LC 2 — Add Two Numbers (10 min, recursion + carry propagation, 100th percentile runtime). Linked List medium confirm done, section closed. Code note: two overloads with duplicated logic → use single public method + private helper with carry param instead.
+**Phase 1 progress:** Greedy and 2-D DP are in progress. Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs, and 1-D DP are confirmed/closed. See the Progress Tracker for evidence and the Current State block for the current pointer.
 
 ---
 
@@ -231,11 +210,9 @@ Append a new row after every session — newest at the top.
 | 2026-07-03 | Phase 0 | DP | LC 300 - Longest Increasing Subsequence (Java, O(n²)) | ~60 min active (65 min elapsed − 5 min break) | 2/5 | Recursion (take/skip) came fast (~11 min), but recursion→bottom-up-table translation didn't click on its own — needed a hint on the `dp[i]` = LIS ending at i framing. Independently derived the "patience sorting / tails" dominance-pruning idea from first principles before being taught it — strong signal the underlying DP intuition is intact. Real gap identified: recursive-DP → tabulation translation fluency, not DP concepts themselves. Also flagged: comfort with `int[]` vs `List<Integer>` needs reps — reached for List by habit. |
 
 ## Stats Summary
-*(update periodically, not every session — last synced 2026-07-27)*
+*(periodic snapshot — last synced 2026-08-02)*
 - Total problems solved since restart: 40 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743/322/1143/62/64/63/72/5/97/53/55/45)
-- Active days so far: 20 of 25 calendar days (2026-07-03 to 07-27; 07-07, 07-13, 07-14, 07-16, 07-17, 07-20, 07-22 were gaps — wait, verify)
-- Current streak: 7 days (07-21 to 07-27)
-- Current phase: Phase 1 — Pattern Reactivation. 12 sections confirmed/closed. 2-D DP in progress.
+- Current phase: Phase 1 — Pattern Reactivation. Greedy and 2-D DP are in progress.
 - Weakest topic: formerly DP — now climbing. 1-D DP closed (5 problems). 2-D DP in progress (LC1143/62/64/63/72/5).
 - Strongest topics: Union-Find (5/5), Arrays & Hashing (5/5, 4/5), Linked List (5/5), Trees (5/5), 1-D DP (4/5 on final solves)
 - Recurring pattern to watch: Java collection API mixups (poll/peek, contains/isPresent) and "adjacency list" vs "adjacency matrix" terminology

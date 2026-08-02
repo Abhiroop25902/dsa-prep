@@ -7,12 +7,26 @@ No code, no build, no tests, no CI. All work is updating the plan file.
 
 Always include `user_id="abhiroopmukherjee"` and `app_id="Abhiroop25902-dsa-prep"` in every `search_memories` filter and `add_memory` call.
 
+## Source Of Truth
+
+- The user's current message overrides stored state when it reports new progress or changes intent.
+- `Current State` in the plan is authoritative for the current assignment and session pointer.
+- `Progress Tracker` is authoritative for historical solves and learning evidence.
+- `Stats Summary` is a derived snapshot and must not override `Current State` or the newest tracker row.
+- Mem0 is supplementary: use it for stable preferences, recurring gaps, durable learning patterns, and decisions. Do not treat old assignments or session summaries in Mem0 as current.
+
+## Mem0 Retention
+
+- Store stable coaching preferences, recurring weaknesses, durable conceptual lessons, and long-term decisions.
+- Do not store every timestamped thought, accepted submission, temporary assignment, or fact already fully represented in the tracker.
+
 ## Workflow
 
-- **Session start:** `rtk git status` — if uncommitted changes exist from a prior day, commit them first: `rtk git add -A && rtk git commit -m "Day YYYY-MM-DD: carryover from previous session"`. Then read the plan file to pick up where you left off.
-- **Commit after every problem solve.** After updating Progress Tracker, Stats Summary, and Currently Assigned: `rtk git add . && rtk git commit -m "Day YYYY-MM-DD: <problem> solved (<stats>)"`.
-- Merge same-day problems into one row with timestamped entries.
+- **Session start:** `rtk git status` — if uncommitted changes exist from a prior day, commit them first: `rtk git add -A && rtk git commit -m "Day YYYY-MM-DD: carryover from previous session"`. Then read `Current State` first, followed by the latest Progress Tracker rows.
+- **Commit after every problem solve.** After updating Progress Tracker, Current State, and Currently Assigned (and Stats Summary when its periodic snapshot is due): `rtk git add . && rtk git commit -m "Day YYYY-MM-DD: <problem> solved (<stats>)"`.
+- Keep separate Progress Tracker rows when same-day problems have distinct timing, confidence, or learning evidence; combine only genuinely shared sessions.
 - Only trust what's logged in the Progress Tracker. If user mentions unlogged progress, ask for confirmation.
+- **Session close check:** before committing, verify the newest tracker row matches the user's report, `Current State` points to the next problem, the total count is consistent, and no stale assignment remains in the active sections.
 
 ## Communication
 
