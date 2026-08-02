@@ -82,7 +82,9 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 - **No choices:** never offer a menu of problems — just assign the next one. He'll self-select if he wants more or wants to skip ahead; the AI shouldn't let him bias toward comfortable territory.
 
 ## Currently Assigned
-**Phase 1 progress:** Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path, 1-D DP all confirmed/closed. 2-D DP in progress (LC 1143, 62, 64, 63, 72, 5, 97). Greedy in progress (LC 53, 55).
+**Phase 1 progress:** Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs BFS/DFS, Graphs — Dijkstra/Shortest Path, 1-D DP all confirmed/closed. 2-D DP in progress (LC 1143, 62, 64, 63, 72, 5, 97). Greedy in progress (LC 53, 55, 45).
+
+**2026-08-02 result:** LC 45 — Jump Game II (Medium, ~16 min, 4.5/5). Reframed BFS as level-order frontier scanning: all indices reachable in the current number of jumps form one range, and scanning that range determines the farthest boundary for the next jump. Accepted in 1ms (99.73%), 47.09MB (88.85%). O(n) time, O(1) extra space.
 
 **2026-08-02 result:** LC 55 — Jump Game (Medium, 3 min, 4.5/5). Independently derived the greedy invariant: maintain the farthest reachable index and fail if the scan reaches an index beyond it. Accepted in 2ms (88.66%), 47.39MB (98.75%). O(n) time, O(1) extra space.
 
@@ -92,7 +94,7 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 
 **Next session:**
 - Topic: Greedy
-- Problem: [LC 45 — Jump Game II (Medium)](https://leetcode.com/problems/jump-game-ii/)
+- Problem: [LC 56 — Merge Intervals (Medium)](https://leetcode.com/problems/merge-intervals/)
 
 **2026-07-27 result:** LC 5 — Longest Palindromic Substring (Medium, 12 min, 4/5, BFS center-expansion). LC 97 — Interleaving String (Medium, ~20 min, 2.5/5, needed hint for memoization state, low confidence).
 
@@ -198,6 +200,7 @@ Append a new row after every session — newest at the top.
 
 | Date | Phase | Topic | Problem/Activity | Time | Confidence (1-5) | Notes |
 |------|-------|-------|-------------------|------|-------------------|-------|
+| 2026-08-02 | Phase 1 | Greedy | LC 45 — Jump Game II (Medium, 3:32–3:48) | ~16 min | 4.5/5 | Initially considered BFS and correctly recognized that explicit queue growth was unnecessary. Reframed BFS levels as contiguous jump frontiers: scan the current frontier and compute the farthest reach of the next jump, using O(1) state. Accepted: 1ms (99.73%), 47.09MB (88.85%). O(n) time, O(1) extra space. |
 | 2026-08-02 | Phase 1 | Greedy | LC 55 — Jump Game (Medium, 3:23–3:26) | 3 min | 4.5/5 | Independently derived the greedy reachability scan: `idxReach` stores the farthest index reachable from all positions processed so far; if `i > idxReach`, the current index is unreachable and the answer is false. Correct O(n) time, O(1) extra space solution. Accepted: 2ms (88.66%), 47.39MB (98.75%). |
 | 2026-08-02 | Phase 1 | Greedy | LC 53 — Maximum Subarray (Medium, 3:03–3:20) | ~17 min | 3.5/5 | Identified the naive O(n^3) range-sum approach and O(n^2) prefix-sum optimization, then rejected both for n=10^5. Needed a hint to reach Kadane's algorithm. Correct implementation: `runningSum` tracks the best subarray ending at the current index; reset before adding when the prior sum is negative. O(n) time, O(1) extra space. Intuition behind the invariant needs reinforcement. |
 | 2026-07-30 | Phase 1 | 2-D DP | LC 516 — Longest Palindromic Subsequence (Medium, 6:12–7:00) | ~48 min | 3/5 | Center-expansion approach (ported from LC 5) doesn't naturally fit subsequences — recurrence should shrink inward, not expand outward. TLE bug: `int[][]` sentinel `0` conflated "uncomputed" with "answer is 0" (same gotcha as LC 64). Fixed with `-1` sentinel. 102ms (5.07%). |
@@ -229,7 +232,7 @@ Append a new row after every session — newest at the top.
 
 ## Stats Summary
 *(update periodically, not every session — last synced 2026-07-27)*
-- Total problems solved since restart: 39 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743/322/1143/62/64/63/72/5/97/53/55)
+- Total problems solved since restart: 40 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743/322/1143/62/64/63/72/5/97/53/55/45)
 - Active days so far: 20 of 25 calendar days (2026-07-03 to 07-27; 07-07, 07-13, 07-14, 07-16, 07-17, 07-20, 07-22 were gaps — wait, verify)
 - Current streak: 7 days (07-21 to 07-27)
 - Current phase: Phase 1 — Pattern Reactivation. 12 sections confirmed/closed. 2-D DP in progress.
