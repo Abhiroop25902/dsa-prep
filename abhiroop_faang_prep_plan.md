@@ -1,17 +1,17 @@
 # Abhiroop's FAANG Interview Prep — Living Plan
-*Last updated: 2026-08-02*
+*Last updated: 2026-08-03*
 
 ---
 
 ## Current State
-- **Last solved:** LC 45 — Jump Game II (2026-08-02, confidence 4.5/5)
-- **Next problem:** [LC 56 — Merge Intervals (Medium)](https://leetcode.com/problems/merge-intervals/)
+- **Last solved:** LC 56 — Merge Intervals (2026-08-03, confidence 4.5/5)
+- **Next problem:** [LC 57 — Insert Interval (Medium)](https://leetcode.com/problems/insert-interval/)
 - **Current topic:** Greedy
 - **Current phase:** Phase 1 — Pattern Reactivation
-- **Problems solved since restart:** 40
+- **Problems solved since restart:** 41
 - **Topic status:** Greedy — `in progress`; 2-D DP — `in progress`; all earlier sections — `confirmed/closed`
 - **Active learning gaps:** Kadane's invariant intuition; 2-D DP memoization pattern recognition
-- **Last session:** Three greedy problems completed independently or with one hint: LC 53, LC 55, LC 45.
+- **Last session:** LC 56 solved independently in ~10 minutes using sort-and-merge interval scanning.
 
 ---
 
@@ -95,7 +95,7 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 
 ## Currently Assigned
 **Topic:** Greedy
-**Problem:** [LC 56 — Merge Intervals (Medium)](https://leetcode.com/problems/merge-intervals/)
+**Problem:** [LC 57 — Insert Interval (Medium)](https://leetcode.com/problems/insert-interval/)
 
 **Phase 1 progress:** Greedy and 2-D DP are in progress. Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs, and 1-D DP are confirmed/closed. See the Progress Tracker for evidence and the Current State block for the current pointer.
 
@@ -179,6 +179,7 @@ Append a new row after every session — newest at the top.
 
 | Date | Phase | Topic | Problem/Activity | Time | Confidence (1-5) | Notes |
 |------|-------|-------|-------------------|------|-------------------|-------|
+| 2026-08-03 | Phase 1 | Greedy / Intervals | LC 56 — Merge Intervals (Medium, 9:37–9:47) | 10 min | 4.5/5 | Independently derived sort-by-start plus current-interval merging. Correct scan and overlap condition; accepted in 9ms (36.33%), 49.11MB (43.61%). Complexity correction: sorting makes total time `O(n log n)`; result storage is `O(n)`, while the merge scan uses `O(1)` auxiliary state. |
 | 2026-08-02 | Phase 1 | Greedy | LC 45 — Jump Game II (Medium, 3:32–3:48) | ~16 min | 4.5/5 | Initially considered BFS and correctly recognized that explicit queue growth was unnecessary. Reframed BFS levels as contiguous jump frontiers: scan the current frontier and compute the farthest reach of the next jump, using O(1) state. Accepted: 1ms (99.73%), 47.09MB (88.85%). O(n) time, O(1) extra space. |
 | 2026-08-02 | Phase 1 | Greedy | LC 55 — Jump Game (Medium, 3:23–3:26) | 3 min | 4.5/5 | Independently derived the greedy reachability scan: `idxReach` stores the farthest index reachable from all positions processed so far; if `i > idxReach`, the current index is unreachable and the answer is false. Correct O(n) time, O(1) extra space solution. Accepted: 2ms (88.66%), 47.39MB (98.75%). |
 | 2026-08-02 | Phase 1 | Greedy | LC 53 — Maximum Subarray (Medium, 3:03–3:20) | ~17 min | 3.5/5 | Identified the naive O(n^3) range-sum approach and O(n^2) prefix-sum optimization, then rejected both for n=10^5. Needed a hint to reach Kadane's algorithm. Correct implementation: `runningSum` tracks the best subarray ending at the current index; reset before adding when the prior sum is negative. O(n) time, O(1) extra space. Intuition behind the invariant needs reinforcement. |
@@ -210,8 +211,8 @@ Append a new row after every session — newest at the top.
 | 2026-07-03 | Phase 0 | DP | LC 300 - Longest Increasing Subsequence (Java, O(n²)) | ~60 min active (65 min elapsed − 5 min break) | 2/5 | Recursion (take/skip) came fast (~11 min), but recursion→bottom-up-table translation didn't click on its own — needed a hint on the `dp[i]` = LIS ending at i framing. Independently derived the "patience sorting / tails" dominance-pruning idea from first principles before being taught it — strong signal the underlying DP intuition is intact. Real gap identified: recursive-DP → tabulation translation fluency, not DP concepts themselves. Also flagged: comfort with `int[]` vs `List<Integer>` needs reps — reached for List by habit. |
 
 ## Stats Summary
-*(periodic snapshot — last synced 2026-08-02)*
-- Total problems solved since restart: 40 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743/322/1143/62/64/63/72/5/97/53/55/45)
+*(periodic snapshot — last synced 2026-08-03)*
+- Total problems solved since restart: 41 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743/322/1143/62/64/63/72/5/97/53/55/45/56)
 - Current phase: Phase 1 — Pattern Reactivation. Greedy and 2-D DP are in progress.
 - Weakest topic: formerly DP — now climbing. 1-D DP closed (5 problems). 2-D DP in progress (LC1143/62/64/63/72/5).
 - Strongest topics: Union-Find (5/5), Arrays & Hashing (5/5, 4/5), Linked List (5/5), Trees (5/5), 1-D DP (4/5 on final solves)
