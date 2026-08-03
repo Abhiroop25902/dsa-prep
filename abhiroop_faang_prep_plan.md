@@ -4,14 +4,14 @@
 ---
 
 ## Current State
-- **Last solved:** LC 56 — Merge Intervals (2026-08-03, confidence 4.5/5)
-- **Next problem:** [LC 57 — Insert Interval (Medium)](https://leetcode.com/problems/insert-interval/)
+- **Last solved:** LC 57 — Insert Interval (2026-08-03, confidence 4.5/5)
+- **Next problem:** [LC 435 — Non-overlapping Intervals (Medium)](https://leetcode.com/problems/non-overlapping-intervals/)
 - **Current topic:** Greedy
 - **Current phase:** Phase 1 — Pattern Reactivation
-- **Problems solved since restart:** 41
+- **Problems solved since restart:** 42
 - **Topic status:** Greedy — `in progress`; 2-D DP — `in progress`; all earlier sections — `confirmed/closed`
 - **Active learning gaps:** Kadane's invariant intuition; 2-D DP memoization pattern recognition
-- **Last session:** LC 56 solved independently in ~10 minutes using sort-and-merge interval scanning.
+- **Last session:** LC 56 and LC 57 solved independently using standard interval scanning and merging.
 
 ---
 
@@ -95,7 +95,7 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 
 ## Currently Assigned
 **Topic:** Greedy
-**Problem:** [LC 57 — Insert Interval (Medium)](https://leetcode.com/problems/insert-interval/)
+**Problem:** [LC 435 — Non-overlapping Intervals (Medium)](https://leetcode.com/problems/non-overlapping-intervals/)
 
 **Phase 1 progress:** Greedy and 2-D DP are in progress. Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs, and 1-D DP are confirmed/closed. See the Progress Tracker for evidence and the Current State block for the current pointer.
 
@@ -179,6 +179,7 @@ Append a new row after every session — newest at the top.
 
 | Date | Phase | Topic | Problem/Activity | Time | Confidence (1-5) | Notes |
 |------|-------|-------|-------------------|------|-------------------|-------|
+| 2026-08-03 | Phase 1 | Greedy / Intervals | LC 57 — Insert Interval (Medium, 9:51–10:09) | 18 min | 4.5/5 | Independently derived the three-phase one-pass structure: append intervals before the new interval, merge all overlapping intervals, then append the remainder. Accepted in 1ms (98.19%), 46.99MB (76.22%). `O(n)` time and `O(n)` result space. |
 | 2026-08-03 | Phase 1 | Greedy / Intervals | LC 56 — Merge Intervals (Medium, 9:37–9:47) | 10 min | 4.5/5 | Independently derived sort-by-start plus current-interval merging. Correct scan and overlap condition; accepted in 9ms (36.33%), 49.11MB (43.61%). Complexity correction: sorting makes total time `O(n log n)`; result storage is `O(n)`, while the merge scan uses `O(1)` auxiliary state. |
 | 2026-08-02 | Phase 1 | Greedy | LC 45 — Jump Game II (Medium, 3:32–3:48) | ~16 min | 4.5/5 | Initially considered BFS and correctly recognized that explicit queue growth was unnecessary. Reframed BFS levels as contiguous jump frontiers: scan the current frontier and compute the farthest reach of the next jump, using O(1) state. Accepted: 1ms (99.73%), 47.09MB (88.85%). O(n) time, O(1) extra space. |
 | 2026-08-02 | Phase 1 | Greedy | LC 55 — Jump Game (Medium, 3:23–3:26) | 3 min | 4.5/5 | Independently derived the greedy reachability scan: `idxReach` stores the farthest index reachable from all positions processed so far; if `i > idxReach`, the current index is unreachable and the answer is false. Correct O(n) time, O(1) extra space solution. Accepted: 2ms (88.66%), 47.39MB (98.75%). |
@@ -212,7 +213,7 @@ Append a new row after every session — newest at the top.
 
 ## Stats Summary
 *(periodic snapshot — last synced 2026-08-03)*
-- Total problems solved since restart: 41 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743/322/1143/62/64/63/72/5/97/53/55/45/56)
+- Total problems solved since restart: 42 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743/322/1143/62/64/63/72/5/97/53/55/45/56/57)
 - Current phase: Phase 1 — Pattern Reactivation. Greedy and 2-D DP are in progress.
 - Weakest topic: formerly DP — now climbing. 1-D DP closed (5 problems). 2-D DP in progress (LC1143/62/64/63/72/5).
 - Strongest topics: Union-Find (5/5), Arrays & Hashing (5/5, 4/5), Linked List (5/5), Trees (5/5), 1-D DP (4/5 on final solves)
