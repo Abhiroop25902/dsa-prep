@@ -23,7 +23,7 @@ Always include `user_id="abhiroopmukherjee"` and `app_id="Abhiroop25902-dsa-prep
 ## Workflow
 
 - **Session start:** `rtk git status` — if uncommitted changes exist from a prior day, commit them first: `rtk git add -A && rtk git commit -m "Day YYYY-MM-DD: carryover from previous session"`. Then read `Current State` first, followed by the latest Progress Tracker rows.
-- **Commit after every problem solve.** After updating Progress Tracker, Current State, and Currently Assigned (and Stats Summary when its periodic snapshot is due): `rtk git add . && rtk git commit -m "Day YYYY-MM-DD: <problem> solved (<stats>)"`.
+- **Commit and push after every problem solve.** After updating Progress Tracker, Current State, and Currently Assigned (and Stats Summary when its periodic snapshot is due): `rtk git add . && rtk git commit -m "Day YYYY-MM-DD: <problem> solved (<stats>)"`, then `rtk git push`.
 - Keep separate Progress Tracker rows when same-day problems have distinct timing, confidence, or learning evidence; combine only genuinely shared sessions.
 - Only trust what's logged in the Progress Tracker. If user mentions unlogged progress, ask for confirmation.
 - **Session close check:** before committing, verify the newest tracker row matches the user's report, `Current State` points to the next problem, the total count is consistent, and no stale assignment remains in the active sections.
