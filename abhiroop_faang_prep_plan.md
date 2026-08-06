@@ -1,14 +1,14 @@
 # Abhiroop's FAANG Interview Prep — Living Plan
-*Last updated: 2026-08-03*
+*Last updated: 2026-08-06*
 
 ---
 
 ## Current State
-- **Last solved:** LC 763 — Partition Labels (2026-08-05, confidence 4.5/5)
-- **Next problem:** [LC 134 — Gas Station (Medium)](https://leetcode.com/problems/gas-station/)
+- **Last solved:** LC 134 — Gas Station (2026-08-06, confidence 3.5/5)
+- **Next problem:** [LC 846 — Hand of Straights (Medium)](https://leetcode.com/problems/hand-of-straights/)
 - **Current topic:** Greedy
 - **Current phase:** Phase 1 — Pattern Reactivation
-- **Problems solved since restart:** 45
+- **Problems solved since restart:** 46
 - **Topic status:** Greedy — `in progress`; 2-D DP — `in progress`; all earlier sections — `confirmed/closed`
 - **Active learning gaps:** Kadane's invariant intuition; 2-D DP memoization pattern recognition
 - **Last session:** LC 452 and LC 763 completed independently; greedy interval reasoning now includes forced character-boundary spans.
@@ -95,7 +95,7 @@ Timed mediums (target: correct approach within 20-25 min), plus hards specifical
 
 ## Currently Assigned
 **Topic:** Greedy
-**Problem:** [LC 134 — Gas Station (Medium)](https://leetcode.com/problems/gas-station/)
+**Problem:** [LC 846 — Hand of Straights (Medium)](https://leetcode.com/problems/hand-of-straights/)
 
 **Phase 1 progress:** Greedy and 2-D DP are in progress. Arrays & Hashing, Two Pointers, Sliding Window, Stack, Binary Search, Linked List, Trees, Backtracking, Graphs, and 1-D DP are confirmed/closed. See the Progress Tracker for evidence and the Current State block for the current pointer.
 
@@ -179,6 +179,7 @@ Append a new row after every session — newest at the top.
 
 | Date | Phase | Topic | Problem/Activity | Time | Confidence (1-5) | Notes |
 |------|-------|-------|-------------------|------|-------------------|-------|
+| 2026-08-06 | Phase 1 | Greedy | LC 134 — Gas Station (Medium, 8:47–9:26) | 39 min | 3.5/5 | Needed a hint after the candidate-by-candidate simulation received TLE. Then derived the skip invariant: when a candidate first reaches negative capacity at station `j`, every start between the candidate and `j` is impossible, so resume at `j`. Accepted in 4ms (7.31%), 119.40MB (46.07%). `O(n)` time because failed ranges are skipped and the valid candidate is checked once; `O(n)` space for the `netCost` array. |
 | 2026-08-05 | Phase 1 | Greedy | LC 763 — Partition Labels (Medium, 5:20–5:40) | 20 min | 4.5/5 | Independently reframed each character as a first-to-last occurrence interval, then merged the intervals to produce partition sizes. Accepted in 12ms (6.38%), 45.56MB (6.61%). `O(n)` time and `O(1)` auxiliary space under the lowercase-English alphabet constraint, but used unnecessary `HashMap<Character, List<Integer>>` and boxed lists; a 26-entry last-index array plus a single boundary scan is shorter and has lower constant overhead. |
 | 2026-08-05 | Phase 1 | Greedy / Intervals | LC 452 — Minimum Number of Arrows to Burst Balloons (Medium, 4:59–5:10) | 11 min | 4.5/5 | Independently mapped the problem to interval intersection: sort by start, maintain the common intersection of the current arrow group, and start a new group when the next balloon is disjoint. Accepted in 60ms (7.93%), 95.58MB (69.87%). `O(n log n)` time from sorting; `O(n)` result-independent input/sort auxiliary space assumption as stated, with `O(1)` scan state. |
 | 2026-08-03 | Phase 1 | Greedy / Intervals | LC 435 — Non-overlapping Intervals (Medium, 10:14–10:36) | 22 min | 4/5 | Initially chose the interval with the shorter range when overlaps were found; hint corrected the greedy invariant: retain the interval with the earlier end because it leaves maximum room for future intervals. Accepted in 61ms (7.71%), 115.87MB (39.55%). `O(n log n)` time from sorting; scan state is `O(1)`, though Java object-array sorting may use auxiliary space. |
@@ -216,7 +217,7 @@ Append a new row after every session — newest at the top.
 
 ## Stats Summary
 *(periodic snapshot — last synced 2026-08-03)*
-- Total problems solved since restart: 45 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743/322/1143/62/64/63/72/5/97/53/55/45/56/57/435/452/763)
+- Total problems solved since restart: 46 (LC300/198/208/215/684/207/210/238/49/11/15/3/424/20/704/206/2/104/102/98/226/46/78/200/743/322/1143/62/64/63/72/5/97/53/55/45/56/57/435/452/763/134)
 - Current phase: Phase 1 — Pattern Reactivation. Greedy and 2-D DP are in progress.
 - Weakest topic: formerly DP — now climbing. 1-D DP closed (5 problems). 2-D DP in progress (LC1143/62/64/63/72/5).
 - Strongest topics: Union-Find (5/5), Arrays & Hashing (5/5, 4/5), Linked List (5/5), Trees (5/5), 1-D DP (4/5 on final solves)
