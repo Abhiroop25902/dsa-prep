@@ -1,17 +1,17 @@
 # Abhiroop's FAANG Interview Prep — Living Plan
-*Last updated: 2026-08-06*
+*Last updated: 2026-08-19*
 
 ---
 
 ## Current State
-- **Last solved:** LC 134 — Gas Station (2026-08-06, confidence 3.5/5)
+- **Last solved:** LC 455 — Assign Cookies (2026-08-19, confidence 4.5/5)
 - **Next problem:** [LC 846 — Hand of Straights (Medium)](https://leetcode.com/problems/hand-of-straights/)
 - **Current topic:** Greedy
 - **Current phase:** Phase 1 — Pattern Reactivation
-- **Problems solved since restart:** 46
+- **Problems solved since restart:** 47
 - **Topic status:** Greedy — `in progress`; 2-D DP — `in progress`; all earlier sections — `confirmed/closed`
 - **Active learning gaps:** Kadane's invariant intuition; 2-D DP memoization pattern recognition
-- **Last session:** LC 452 and LC 763 completed independently; greedy interval reasoning now includes forced character-boundary spans.
+- **Last session:** LC 455 completed independently as a warm-up after a break; reverse greedy matching worked cleanly.
 
 ---
 
@@ -179,6 +179,7 @@ Append a new row after every session — newest at the top.
 
 | Date | Phase | Topic | Problem/Activity | Time | Confidence (1-5) | Notes |
 |------|-------|-------|-------------------|------|-------------------|-------|
+| 2026-08-19 | Phase 1 | Greedy | LC 455 — Assign Cookies (Easy, 6:34–6:43) | 9 min | 4.5/5 | Independently derived reverse greedy matching: sort both arrays, pair each largest greed with the largest remaining cookie when feasible, otherwise skip that child. Accepted in 15ms (59.66%), 51.63MB (19.54%). Complexity correction: `O(g log g + s log s)` time from sorting; `O(1)` scan state with in-place primitive-array sorting, aside from sort-stack overhead. |
 | 2026-08-06 | Phase 1 | Greedy | LC 134 — Gas Station (Medium, 8:47–9:26) | 39 min | 3.5/5 | Needed a hint after the candidate-by-candidate simulation received TLE. Then derived the skip invariant: when a candidate first reaches negative capacity at station `j`, every start between the candidate and `j` is impossible, so resume at `j`. Accepted in 4ms (7.31%), 119.40MB (46.07%). `O(n)` time because failed ranges are skipped and the valid candidate is checked once; `O(n)` space for the `netCost` array. |
 | 2026-08-05 | Phase 1 | Greedy | LC 763 — Partition Labels (Medium, 5:20–5:40) | 20 min | 4.5/5 | Independently reframed each character as a first-to-last occurrence interval, then merged the intervals to produce partition sizes. Accepted in 12ms (6.38%), 45.56MB (6.61%). `O(n)` time and `O(1)` auxiliary space under the lowercase-English alphabet constraint, but used unnecessary `HashMap<Character, List<Integer>>` and boxed lists; a 26-entry last-index array plus a single boundary scan is shorter and has lower constant overhead. |
 | 2026-08-05 | Phase 1 | Greedy / Intervals | LC 452 — Minimum Number of Arrows to Burst Balloons (Medium, 4:59–5:10) | 11 min | 4.5/5 | Independently mapped the problem to interval intersection: sort by start, maintain the common intersection of the current arrow group, and start a new group when the next balloon is disjoint. Accepted in 60ms (7.93%), 95.58MB (69.87%). `O(n log n)` time from sorting; `O(n)` result-independent input/sort auxiliary space assumption as stated, with `O(1)` scan state. |
